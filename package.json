@@ -1,0 +1,37 @@
+{
+  "name": "redac",
+  "version": "0.0.0",
+  "description": "Redact is a content authoring library to source content into your website.",
+  "keywords": [
+    "node",
+    "content",
+    "authoring",
+    "editor",
+    "markdown",
+    "mdx",
+    "next.js",
+    "gatsby",
+    "astro",
+    "remix"
+  ],
+  "author": "David Worms <david@adaltas.com> (https://www.adaltas.com)",
+  "bugs": "https://github.com/adaltas/node-redac/issues",
+  "contributors": [
+    "David Worms <david@adaltas.com> (https://www.adaltas.com)"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "husky": "^8.0.3",
+    "pinst": "^3.0.0"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": "https://github.com/adaltas/node-redac",
+  "scripts": {
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
+  },
+  "type": "module"
+}
