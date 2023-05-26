@@ -24,6 +24,7 @@
     "@commitlint/config-conventional": "^17.6.3",
     "husky": "^8.0.3",
     "pinst": "^3.0.0",
+    "should": "^13.2.3",
     "standard-version": "^9.5.0"
   },
   "license": "MIT",
@@ -37,7 +38,25 @@
     "postinstall": "husky install",
     "postrelease": "git push --follow-tags origin master && npm publish",
     "prepack": "pinst --disable",
-    "postpack": "pinst --enable"
+    "postpack": "pinst --enable",
+    "test": "node --test --test-reporter spec test/*.js"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "dedent": "^0.7.0",
+    "each": "^2.4.0",
+    "github-slugger": "^2.0.0",
+    "glob": "^10.2.6",
+    "lodash.deburr": "^4.1.0",
+    "mixme": "^0.5.9",
+    "remark-extract-frontmatter": "^3.2.0",
+    "remark-frontmatter": "^4.0.1",
+    "remark-parse": "^10.0.2",
+    "remark-stringify": "^10.0.3",
+    "remark-table-of-content": "^0.1.0",
+    "remark-title-to-frontmatter": "^0.1.7",
+    "unified": "^10.1.2",
+    "unist-util-visit": "^4.1.2",
+    "yaml": "^2.3.1"
+  }
 }
