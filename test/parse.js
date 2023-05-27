@@ -17,7 +17,7 @@ describe('engine.parse', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
-  it('extract collections', async () => {
+  it('extract title from content', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md', dedent`
         # Heading 1
@@ -37,6 +37,25 @@ describe('engine.parse', async () => {
         data: {
           title: 'Heading 1',
         },
+      },
+    ])
+  })
+  it('extract toc', async () => {
+    await mklayout(tmpdir, [
+      ['./blog/article_1.md', dedent`
+        # Heading 1
+        Some content
+        ## Heading 2
+      `],
+    ])
+    ;(
+      await parse(
+        enrich(
+          await source(tmpdir)
+        )
+      )
+    ).should.match([
+      {
         toc: [
           {
             title: 'Heading 2',
