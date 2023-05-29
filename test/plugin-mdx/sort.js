@@ -2,10 +2,12 @@ import {beforeEach, afterEach, describe, it} from 'node:test'
 import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
-import mklayout from '../lib/utils/mklayout.js'
-import {enrich, sort, source} from '../lib/index.js'
+import mklayout from '../../lib/utils/mklayout.js'
+import source from '../../lib/plugin-mdx/1.source.js'
+import enrich from '../../lib/plugin-mdx/2.enrich.js'
+import sort from '../../lib/plugin-mdx/3.sort.js'
 
-describe('engine.sort', async () => {
+describe('mdx.sort', async () => {
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -24,11 +26,11 @@ describe('engine.sort', async () => {
       ['./blog/01.path/02.a_dir/article_4.fr.mdx'],
       ['./blog/01.path/02.a_dir/02.article_5.fr.mdx'],
     ])
-    sort(
-      enrich(
-        await source(tmpdir)
-      )
-    )
+    sort({
+      documents: enrich({
+        documents: await source({ config: tmpdir })
+      })
+    })
     .map( document => ({
       slug: document.slug
     }))
@@ -50,11 +52,12 @@ describe('engine.sort', async () => {
       ['./blog/01.path/02.a_dir/article_4.fr.mdx'],
       ['./blog/01.path/02.a_dir/02.article_5.fr.mdx'],
     ])
-    sort(
-      enrich(
-        await source(tmpdir)
-      )
-    )
+    sort({
+      documents: enrich({
+        documents: await source({ config: tmpdir })
+      })
+    
+    })
     .map( document => ({
       slug: document.slug
     }))

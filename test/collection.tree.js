@@ -26,7 +26,7 @@ describe('engine.collection.tree', async () => {
       ['./pages/root/parent_2/child_1.md'],
     ])
     ;(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
       .from('pages')
       .map((document) => ({
         slug: document.slug
@@ -79,7 +79,7 @@ describe('engine.collection.tree', async () => {
       ['./pages/some/root/parent_3.md'],
       ['./pages/some/root/parent_3/child_1.md'],
     ])
-    const documents = await engine(tmpdir)
+    const documents = await engine.mdx(tmpdir)
       .from('pages')
       .filter(document => (
         document.slug[2] === 'parent_1' || document.slug[2] === 'parent_3'
@@ -125,7 +125,7 @@ describe('engine.collection.tree', async () => {
   //     ['./pages/parent_1/child_1.md'],
   //     ['./pages/parent_1/child_2.md'],
   //   ])
-  //   const document = await engine(tmpdir)
+  //   const document = await engine.mdx(tmpdir)
   //     .from('pages')
   //     .map((document) => ({
   //       slug: document.slug,

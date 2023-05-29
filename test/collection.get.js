@@ -19,7 +19,7 @@ describe('engine.collection.get', async () => {
   it('return undefined if not found', async () => {
     await mklayout(tmpdir, [])
     should(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
         .from('blog')
         .match(['invalid'])
         .get()
@@ -30,7 +30,7 @@ describe('engine.collection.get', async () => {
       ['./blog/article.md'],
     ])
     ;(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
         .from('blog')
         .get()
     )
@@ -43,7 +43,7 @@ describe('engine.collection.get', async () => {
       ['./blog/article.en.md'],
       ['./blog/article.fr.md'],
     ])
-    await engine(tmpdir)
+    await engine.mdx(tmpdir)
       .from('blog')
       .get()
     .should.be.rejectedWith('Invalid Query: found more than one element matching the filter.')

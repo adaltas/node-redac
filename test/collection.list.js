@@ -23,7 +23,7 @@ describe('engine.collection.list', async () => {
       ['./pages/page_1.mdx'],
     ])
     ;(
-      await engine(tmpdir).from('blog').list()
+      await engine.mdx(tmpdir).from('blog').list()
     ).should.match([
       {
         collection: 'blog',
@@ -44,7 +44,7 @@ describe('engine.collection.list', async () => {
       ['./blog/article_2.en.md'],
     ])
     ;(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
         .from('blog')
         .filter((document) => (['fr', 'de'].includes(document.lang)))
         .list()

@@ -2,10 +2,11 @@ import {beforeEach, afterEach, describe, it} from 'node:test'
 import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
-import mklayout from '../lib/utils/mklayout.js'
-import {enrich, source} from '../lib/index.js'
+import mklayout from '../../lib/utils/mklayout.js'
+import source from '../../lib/plugin-mdx/1.source.js'
+import enrich from '../../lib/plugin-mdx/2.enrich.js'
 
-describe('engine.enrich.lang', async () => {
+describe('mdx.enrich.lang', async () => {
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -24,9 +25,9 @@ describe('engine.enrich.lang', async () => {
       ['./blog/path/to/article_4.fr.mdx'],
       ['./blog/path/to/02.article_5.fr.mdx'],
     ])
-    enrich(
-      await source(tmpdir)
-    ).map(document => ({
+    enrich({
+      documents: await source({config: tmpdir}),
+    }).map(document => ({
       lang: document.lang,
       slug: document.slug,
     })).should.match([

@@ -23,7 +23,7 @@ describe('engine.collection.match', async () => {
       ['./pages/page_1.mdx'],
     ])
     ;(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
         .from('blog')
         .match(['article_2'])
         .get()
@@ -39,7 +39,7 @@ describe('engine.collection.match', async () => {
       ['./blog/article_2.en.mdx'],
       ['./blog/article_2.fr.mdx'],
     ])
-    ;(await engine(tmpdir).from('blog').match('fr').list()).should.match([
+    ;(await engine.mdx(tmpdir).from('blog').match('fr').list()).should.match([
       {
         collection: 'blog',
         lang: 'fr',
@@ -59,7 +59,7 @@ describe('engine.collection.match', async () => {
       ['./pages/page_1.mdx'],
     ])
     ;(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
         .from('blog')
         .match({
           slug: ['article_2'],

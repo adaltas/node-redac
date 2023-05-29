@@ -23,7 +23,7 @@ describe('engine.collection.map', async () => {
       ['./pages/page_1.mdx'],
     ])
     ;(
-      await engine(tmpdir)
+      await engine.mdx(tmpdir)
         .from('blog')
         .match({
           slug: ['article_2'],

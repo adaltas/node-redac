@@ -20,7 +20,7 @@ describe('engine', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
     ])
-    const eng = await engine(tmpdir)
+    const eng = await engine()
     Object.keys(eng).should.eql(['db', 'from'])
   })
 
