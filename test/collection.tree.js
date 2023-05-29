@@ -1,149 +1,182 @@
-import { beforeEach, afterEach, describe, it } from 'node:test'
-import fs from 'node:fs/promises'
-import os from 'node:os'
-import 'should'
-import mklayout from '../lib/utils/mklayout.js'
-import engine from '../lib/index.js'
+import { describe, it } from "node:test";
+import "should";
+import engine from "../lib/index.js";
 
-describe('engine.collection.tree', async () => {
-  let tmpdir
-  let count = 0
-  beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/tdp-test-collection-tree-${count++}`
-    try {
-      await fs.rm(tmpdir, { recursive: true })
-    } catch {}
-    await fs.mkdir(`${tmpdir}`)
-  })
-  afterEach(async () => {
-    await fs.rm(tmpdir, { recursive: true })
-  })
-  it('from root with holes', async () => {
-    await mklayout(tmpdir, [
-      ['./pages/root.md'],
-      ['./pages/root/parent_1/child_1.md'],
-      ['./pages/root/parent_1/child_2.md'],
-      ['./pages/root/parent_2/child_1.md'],
-    ])
-    ;(
-      await engine.mdx(tmpdir)
-      .from('pages')
-      .map((document) => ({
-        slug: document.slug
-      }))
-      .tree()
-    )
-    .should.eql([
+describe("engine.collection.tree", async () => {
+  it("from root with holes", async () => {
+    (
+      await engine
+        .memory({
+          documents: [
+            {
+              collection: "pages",
+              slug: ["root"],
+            },
+            {
+              collection: "pages",
+              slug: ["root", "parent_1", "child_1"],
+            },
+            {
+              collection: "pages",
+              slug: ["root", "parent_1", "child_2"],
+            },
+            {
+              collection: "pages",
+              slug: ["root", "parent_2", "child_1"],
+            },
+          ],
+        })
+        .from("pages")
+        .map((document) => ({
+          slug: document.slug,
+        }))
+        .tree()
+    ).should.eql([
       {
-        slug: ['root'],
-        slug_relative: [ 'root' ],
+        slug: ["root"],
+        slug_relative: ["root"],
         children: [
           {
-            slug: ['root', 'parent_1'],
-            slug_relative: [ 'root', 'parent_1' ],
+            slug: ["root", "parent_1"],
+            slug_relative: ["root", "parent_1"],
             children: [
               {
-                slug: ['root', 'parent_1', 'child_1'],
-                slug_relative: [ 'root', 'parent_1', 'child_1' ],
+                slug: ["root", "parent_1", "child_1"],
+                slug_relative: ["root", "parent_1", "child_1"],
                 children: [],
               },
               {
-                slug: ['root', 'parent_1', 'child_2'],
-                slug_relative: [ 'root', 'parent_1', 'child_2' ],
+                slug: ["root", "parent_1", "child_2"],
+                slug_relative: ["root", "parent_1", "child_2"],
                 children: [],
               },
             ],
           },
           {
-            slug: ['root', 'parent_2'],
-            slug_relative: [ 'root', 'parent_2' ],
+            slug: ["root", "parent_2"],
+            slug_relative: ["root", "parent_2"],
             children: [
               {
-                slug: ['root', 'parent_2', 'child_1'],
-                slug_relative: [ 'root', 'parent_2', 'child_1' ],
+                slug: ["root", "parent_2", "child_1"],
+                slug_relative: ["root", "parent_2", "child_1"],
                 children: [],
               },
             ],
           },
         ],
       },
-    ])
-  })
+    ]);
+  });
 
-  it('of multiple directories', async () => {
-    await mklayout(tmpdir, [
-      ['./pages/some/root/parent_1.md'],
-      ['./pages/some/root/parent_1/child_1.md'],
-      ['./pages/some/root/parent_1/child_2.md'],
-      ['./pages/some/root/parent_2.md'],
-      ['./pages/some/root/parent_3.md'],
-      ['./pages/some/root/parent_3/child_1.md'],
-    ])
-    const documents = await engine.mdx(tmpdir)
-      .from('pages')
-      .filter(document => (
-        document.slug[2] === 'parent_1' || document.slug[2] === 'parent_3'
-      ))
+  it("of multiple directories", async () => {
+    const documents = await engine
+      .memory({
+        documents: [
+          {
+            collection: "pages",
+            slug: ["some", "root", "parent_1"],
+          },
+          {
+            collection: "pages",
+            slug: ["some", "root", "parent_1", "child_1"],
+          },
+          {
+            collection: "pages",
+            slug: ["some", "root", "parent_1", "child_2"],
+          },
+          {
+            collection: "pages",
+            slug: ["some", "root", "parent_2"],
+          },
+          {
+            collection: "pages",
+            slug: ["some", "root", "parent_3"],
+          },
+          {
+            collection: "pages",
+            slug: ["some", "root", "parent_3", "child_1"],
+          },
+        ],
+      })
+      .from("pages")
+      .filter(
+        (document) =>
+          document.slug[2] === "parent_1" || document.slug[2] === "parent_3"
+      )
       .map((document) => ({
-        slug: document.slug
+        slug: document.slug,
       }))
-      .tree()
+      .tree();
     documents.should.eql([
       {
-        slug: ['some', 'root', 'parent_1'],
-        slug_relative: ['parent_1'],
+        slug: ["some", "root", "parent_1"],
+        slug_relative: ["parent_1"],
         children: [
           {
-            slug: ['some', 'root', 'parent_1', 'child_1'],
-            slug_relative: ['parent_1', 'child_1'],
+            slug: ["some", "root", "parent_1", "child_1"],
+            slug_relative: ["parent_1", "child_1"],
             children: [],
           },
           {
-            slug: ['some', 'root', 'parent_1', 'child_2'],
-            slug_relative: ['parent_1', 'child_2'],
+            slug: ["some", "root", "parent_1", "child_2"],
+            slug_relative: ["parent_1", "child_2"],
             children: [],
-          }
-        ]
+          },
+        ],
       },
       {
-        slug: ['some', 'root', 'parent_3'],
-        slug_relative: ['parent_3'],
+        slug: ["some", "root", "parent_3"],
+        slug_relative: ["parent_3"],
         children: [
           {
-            slug: ['some', 'root', 'parent_3', 'child_1'],
-            slug_relative: ['parent_3', 'child_1'],
+            slug: ["some", "root", "parent_3", "child_1"],
+            slug_relative: ["parent_3", "child_1"],
             children: [],
-          }
-        ]
-      }
-    ])
-  })
+          },
+        ],
+      },
+    ]);
+  });
 
-  // it('combined with get', async () => {
-  //   await mklayout(tmpdir, [
-  //     ['./pages/parent_1.md'],
-  //     ['./pages/parent_1/child_1.md'],
-  //     ['./pages/parent_1/child_2.md'],
-  //   ])
-  //   const document = await engine.mdx(tmpdir)
-  //     .from('pages')
-  //     .map((document) => ({
-  //       slug: document.slug,
-  //     }))
-  //     .tree()
-  //     .get()
-  //   document.should.eql({
-  //     slug: ['parent_1'],
-  //     children: [
-  //       {
-  //         slug: ['parent_1', 'child_1'],
-  //         children: [],
-  //       },
-  //       {
-  //         slug: ['parent_1', 'child_2'],
-  //         children: [],
-  //       },
-  //     ],
-  //   })
-  // })
-})
+  it("combined with get", async () => {
+    const document = await engine
+      .memory({
+        documents: [
+          {
+            collection: "pages",
+            slug: ["parent_1"],
+          },
+          {
+            collection: "pages",
+            slug: ["parent_1", "child_1"],
+          },
+          {
+            collection: "pages",
+            slug: ["parent_1", "child_2"],
+          },
+        ],
+      })
+      .from("pages")
+      .map((document) => ({
+        slug: document.slug,
+      }))
+      .tree()
+      .get();
+    document.should.eql({
+      slug: ["parent_1"],
+      slug_relative: ["parent_1"],
+      children: [
+        {
+          slug: ["parent_1", "child_1"],
+          slug_relative: ["parent_1", "child_1"],
+          children: [],
+        },
+        {
+          slug: ["parent_1", "child_2"],
+          slug_relative: ["parent_1", "child_2"],
+          children: [],
+        },
+      ],
+    });
+  });
+});

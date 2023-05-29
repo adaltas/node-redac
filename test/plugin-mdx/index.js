@@ -21,7 +21,7 @@ describe('mdx', async () => {
       redac.mdx(false)
     ).should.throw([
       'REDAC_MDX_INVALID_ARGUMENTS:',
-      'plugin config must be an object, an array or a string,',
+      'plugin config must be an object or a string,',
       'got false.',
     ].join(' '))
   })
