@@ -12,7 +12,7 @@ describe("mdx.parse", async () => {
   let tmpdir;
   let count = 0;
   beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/tdp-test-parse-${count++}`;
+    tmpdir = `${os.tmpdir()}/redac-test-mdx-parse-${count++}`;
     try {
       await fs.rm(tmpdir, { recursive: true });
     } catch {}

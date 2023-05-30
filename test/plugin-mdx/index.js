@@ -9,7 +9,7 @@ describe('mdx', async () => {
   let tmpdir
   let count = 0
   beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/tdp-test-source-${count++}`
+    tmpdir = `${os.tmpdir()}/redac-test-mdx-${count++}`
     try{ await fs.rm(tmpdir, { recursive: true }) } catch {}
     await fs.mkdir(`${tmpdir}`)
   })

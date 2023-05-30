@@ -10,7 +10,7 @@ describe('mdx.enrich', async () => {
   let tmpdir
   let count = 0
   beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/tdp-test-enrich-${count++}`
+    tmpdir = `${os.tmpdir()}/redac-test-mdx-enrich-${count++}`
     try {
       await fs.rm(tmpdir, { recursive: true })
     } catch {}

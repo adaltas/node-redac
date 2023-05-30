@@ -5,13 +5,13 @@ import "should";
 import mklayout from "../../lib/utils/mklayout.js";
 import source from "../../lib/plugin-mdx/1.source.js";
 import enrich from "../../lib/plugin-mdx/2.enrich.js";
-import sort from "../../lib/plugin-mdx/3.sort.js";
+import sort from "../../lib/utils/sort.js";
 
 describe("mdx.enrich.slug", async () => {
   let tmpdir;
   let count = 0;
   beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/tdp-test-enrich-slug-${count++}`;
+    tmpdir = `${os.tmpdir()}/redac-test-mdx-enrich-slug-${count++}`;
     try {
       await fs.rm(tmpdir, { recursive: true });
     } catch {}
@@ -28,11 +28,11 @@ describe("mdx.enrich.slug", async () => {
       ["./blog/01.path/02.a_dir/article_4.fr.mdx"],
       ["./blog/01.path/02.a_dir/02.article_5.fr.mdx"],
     ]);
-    sort({
-      documents: enrich({
+    sort(
+      enrich({
         documents: await source({ config: tmpdir }),
       })
-    })
+    )
       .map((document) => ({
         slug: document.slug,
         sort: document.sort,
