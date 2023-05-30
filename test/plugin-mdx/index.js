@@ -1,21 +1,8 @@
-import {beforeEach, afterEach, describe, it} from 'node:test'
-import fs from 'node:fs/promises'
-import os from 'node:os'
+import {describe, it} from 'node:test'
 import 'should'
-import mklayout from '../../lib/utils/mklayout.js'
 import redac from '../../lib/index.js'
 
 describe('mdx', async () => {
-  let tmpdir
-  let count = 0
-  beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/redac-test-mdx-${count++}`
-    try{ await fs.rm(tmpdir, { recursive: true }) } catch {}
-    await fs.mkdir(`${tmpdir}`)
-  })
-  afterEach(async () => {
-    await fs.rm(tmpdir, { recursive: true })
-  })
   it('config is invalid', async () => {
     (() => 
       redac.mdx(false)
@@ -26,22 +13,12 @@ describe('mdx', async () => {
     ].join(' '))
   })
   it('config is a string', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article_1.md'],
-      ['./blog/article_2.md'],
-    ])
-    redac.mdx.should.be.a.Function()
-    const engine = redac.mdx(tmpdir)
+    const engine = redac.mdx('/path/to/collection')
     Object.keys(engine).should.eql(['db', 'from'])
   })
   it('config is an object', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article_1.md'],
-      ['./blog/article_2.md'],
-    ])
-    redac.mdx.should.be.a.Function()
     const engine = redac.mdx({
-      cwd: tmpdir
+      cwd: '/path/to/collection'
     })
     Object.keys(engine).should.eql(['db', 'from'])
   })
