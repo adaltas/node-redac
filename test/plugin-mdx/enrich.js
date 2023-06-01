@@ -3,9 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import normalize from '../../lib/plugin-mdx/1.normalize.js'
-import source from '../../lib/plugin-mdx/1.source.js'
-import enrich from '../../lib/plugin-mdx/2.enrich.js'
+import {normalize, source, enrich} from '../../lib/plugin-mdx/index.js'
 
 describe('mdx.enrich', async () => {
   let tmpdir

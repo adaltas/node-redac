@@ -3,8 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import normalize from '../../lib/plugin-mdx/1.normalize.js'
-import source from '../../lib/plugin-mdx/1.source.js'
+import {normalize, source} from '../../lib/plugin-mdx/index.js'
 
 describe('mdx.source', async () => {
   let tmpdir

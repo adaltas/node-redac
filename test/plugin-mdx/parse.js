@@ -4,10 +4,7 @@ import os from 'node:os'
 import 'should'
 import dedent from 'dedent'
 import mklayout from '../../lib/utils/mklayout.js'
-import normalize from '../../lib/plugin-mdx/1.normalize.js'
-import source from '../../lib/plugin-mdx/1.source.js'
-import enrich from '../../lib/plugin-mdx/2.enrich.js'
-import parse from '../../lib/plugin-mdx/4.parse.js'
+import {normalize, source, enrich, parse} from '../../lib/plugin-mdx/index.js'
 
 describe('mdx.parse', async () => {
   let tmpdir
