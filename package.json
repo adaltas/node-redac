@@ -31,7 +31,8 @@
   "exports": {
     ".": "./lib/index.js",
     "./plugins/mdx": "./lib/plugin-mdx/index.js",
-    "./plugins/memory": "./lib/plugin-memory/index.js"
+    "./plugins/memory": "./lib/plugin-memory/index.js",
+    "./plugins/yaml": "./lib/plugin-yaml/index.js"
   },
   "license": "MIT",
   "main": "lib/index.js",
