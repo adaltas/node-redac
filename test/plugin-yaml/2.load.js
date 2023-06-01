@@ -4,8 +4,7 @@ import os from 'node:os'
 import 'should'
 import { stringify } from "yaml"
 import mklayout from '../../lib/utils/mklayout.js'
-import normalize from '../../lib/plugin-yaml/1.normalize.js'
-import load from '../../lib/plugin-yaml/2.load.js'
+import { normalize, load } from '../../lib/plugin-yaml/index.js'
 
 describe('yaml.load', async () => {
   let tmpdir

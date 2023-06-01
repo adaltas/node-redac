@@ -3,9 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import normalize from '../../lib/plugin-yaml/1.normalize.js'
-import load from '../../lib/plugin-yaml/2.load.js'
-import enrich from '../../lib/plugin-yaml/3.enrich.js'
+import { normalize, load, enrich } from '../../lib/plugin-yaml/index.js'
 
 describe('yaml.enrich', async () => {
   let tmpdir

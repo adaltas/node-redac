@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import normalize from '../../lib/plugin-yaml/1.normalize.js'
+import { normalize } from '../../lib/plugin-yaml/index.js'
 
 describe('yaml.load', async () => {
   let tmpdir
