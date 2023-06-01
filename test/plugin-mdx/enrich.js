@@ -3,6 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
+import normalize from '../../lib/plugin-mdx/1.normalize.js'
 import source from '../../lib/plugin-mdx/1.source.js'
 import enrich from '../../lib/plugin-mdx/2.enrich.js'
 
@@ -25,12 +26,19 @@ describe('mdx.enrich', async () => {
       ['./blog/article_2.md'],
       ['./pages/page_1.mdx'],
     ])
-    enrich({
-      documents: await source({config: tmpdir}),
-    }).should.match([
-      { collection: "blog" },
-      { collection: "blog" },
-      { collection: "pages" },
-    ]);
+      .then(() =>
+        normalize({
+          config: { cwd: tmpdir },
+        })
+      )
+      .then((plugin) => source(plugin))
+      .then((plugin) => enrich(plugin))
+      .then(({ documents }) =>
+        documents.should.match([
+          { collection: 'blog' },
+          { collection: 'blog' },
+          { collection: 'pages' },
+        ])
+      )
   })
 })

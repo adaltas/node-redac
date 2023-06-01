@@ -3,6 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
+import normalize from '../../lib/plugin-mdx/1.normalize.js'
 import source from '../../lib/plugin-mdx/1.source.js'
 
 describe('mdx.source', async () => {
@@ -19,28 +20,38 @@ describe('mdx.source', async () => {
   it('config is an object', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
-      ['./blog/article_2.md'],
+      ['./blog/article_2.md']
     ])
-    await source({
-      config: {
-        cwd: tmpdir
-      }
-    }).should.be.finally.match([
-      { path_relative: 'blog/article_1.md' },
-      { path_relative: 'blog/article_2.md' },
-    ])
+      .then(() =>
+        normalize({
+          config: { cwd: tmpdir },
+        })
+      )
+      .then((plugin) => source(plugin))
+      .then(({ documents }) =>
+        documents.should.match([
+          { path_relative: 'blog/article_1.md' },
+          { path_relative: 'blog/article_2.md' },
+        ])
+      )
   })
   it('config is a string', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
       ['./blog/article_2.md'],
     ])
-    await source({
-      config: tmpdir
-    }).should.be.finally.match([
-      { path_relative: 'blog/article_1.md' },
-      { path_relative: 'blog/article_2.md' },
-    ])
+    .then(() =>
+      normalize({
+        config: { cwd: tmpdir },
+      })
+    )
+    .then((plugin) => source(plugin))
+    .then(({ documents }) =>
+      documents.should.match([
+        { path_relative: 'blog/article_1.md' },
+        { path_relative: 'blog/article_2.md' },
+      ])
+    )
   })
   it('filter .md and .mdx extension', async () => {
     await mklayout(tmpdir, [
@@ -49,11 +60,17 @@ describe('mdx.source', async () => {
       ['./blog/article_3.ko'],
       ['./blog/article_4.mdoups'],
     ])
-    await source({
-      config: tmpdir,
-    }).should.be.finally.match([
-      { path_relative: 'blog/article_1.md' },
-      { path_relative: 'blog/article_2.mdx' },
-    ])
+    .then(() =>
+      normalize({
+        config: { cwd: tmpdir },
+      })
+    )
+    .then((plugin) => source(plugin))
+    .then(({ documents }) =>
+      documents.should.match([
+        { path_relative: 'blog/article_1.md' },
+        { path_relative: 'blog/article_2.mdx' },
+      ])
+    )
   })
 })
