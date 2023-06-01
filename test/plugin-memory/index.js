@@ -15,7 +15,7 @@ describe('memory', async () => {
   it('config.documents is invalid', async () => {
     redac.memory({
       documents: false
-    }).db.should.be.rejectedWith([
+    }).db().should.be.rejectedWith([
       'REDAC_MEMORY_INVALID_DOCUMENTS_ARGUMENTS:',
       'config must contain an array of documents,',
       'got false.',
