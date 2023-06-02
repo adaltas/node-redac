@@ -15,20 +15,44 @@ npm install redac
 
 ## Usage
 
-Import the `redac` package, source some data and start querying your dataset:
+Import the `redac` package, source some data and start querying your dataset.
+
+Short form:
 
 ```js
-// Import hte redac package
+// Import the redac package
 import redac from 'redac'
-// Start sourcing data
-const engine = redac
+// Initializethe engine
+const articles = await redac
   // Source Markdown documents
   .mdx('./articles')
-  // Source Yaml documents
-  .yaml('./tags')
-// Start querying
-const articles = engine
+  // Start querying
   .from('articles')
   .filter( document => document.lang === 'fr')
+  .list()
+```
+
+Long form:
+
+```js
+// Import the redac package
+import redac from 'redac'
+// Initialize the engine
+const engine = redac([
+  // Source Markdown documents
+  {
+    module: 'redac/plugins/mdx',
+    config: './articles',
+  },
+  // Source Yaml documents
+  {
+    module: 'redac/plugins/yaml',
+    config: './tags',
+  },
+])
+// Start querying
+const articles = await engine
+  .from('articles')
+  .filter((document) => document.lang === 'fr')
   .list()
 ```
