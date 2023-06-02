@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/adaltas/node-redac/compare/v0.1.0...v0.1.1) (2023-06-02)
+
+
+### Features
+
+* **project:** plugin init simplification ([a3372c6](https://github.com/adaltas/node-redac/commit/a3372c60dca33e8efdf6b6a30360ce34c1f4810f))
+
+
+### Bug Fixes
+
+* **project:** package description typo ([481596f](https://github.com/adaltas/node-redac/commit/481596f4d2334e4c18269473f3f457437d55a497))
+
 ## 0.1.0 (2023-06-01)
 
 
