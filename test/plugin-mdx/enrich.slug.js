@@ -29,7 +29,7 @@ describe('mdx.enrich.slug', async () => {
     ])
       .then(() =>
         normalize({
-          config: { cwd: tmpdir },
+          config: { target: tmpdir },
         })
       )
       .then((plugin) => source(plugin))
@@ -59,7 +59,7 @@ describe('mdx.enrich.slug', async () => {
     ])
       .then(() =>
         normalize({
-          config: { cwd: tmpdir },
+          config: { target: tmpdir },
         })
       )
       .then((plugin) => source(plugin))
@@ -82,7 +82,7 @@ describe('mdx.enrich.slug', async () => {
     ])
       .then(() =>
         normalize({
-          config: { cwd: tmpdir },
+          config: { target: tmpdir },
         })
       )
       .then((plugin) => source(plugin))

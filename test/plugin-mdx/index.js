@@ -18,7 +18,7 @@ describe('mdx', async () => {
   })
   it('config is an object', async () => {
     const engine = redac.mdx({
-      cwd: '/path/to/collection'
+      target: '/path/to/collection'
     })
     Object.keys(engine).should.eql(['db', 'from'])
   })

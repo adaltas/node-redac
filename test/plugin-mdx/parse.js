@@ -30,7 +30,7 @@ describe('mdx.parse', async () => {
       `,
       ],
     ])
-      .then(() => normalize({ config: { cwd: tmpdir } }))
+      .then(() => normalize({ config: { target: tmpdir } }))
       .then((plugin) => source(plugin))
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))
@@ -56,7 +56,7 @@ describe('mdx.parse', async () => {
       `,
       ],
     ])
-      .then(() => normalize({ config: { cwd: tmpdir } }))
+      .then(() => normalize({ config: { target: tmpdir } }))
       .then((plugin) => source(plugin))
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))

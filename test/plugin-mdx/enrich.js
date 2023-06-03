@@ -26,7 +26,7 @@ describe('mdx.enrich', async () => {
     ])
       .then(() =>
         normalize({
-          config: { cwd: tmpdir },
+          config: { target: tmpdir },
         })
       )
       .then((plugin) => source(plugin))
