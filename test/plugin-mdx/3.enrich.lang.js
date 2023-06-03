@@ -26,7 +26,7 @@ describe('mdx.enrich.lang', async () => {
     ])
     .then(() =>
       normalize({
-        config: { target: tmpdir },
+        config: { target: `${tmpdir}/blog` },
       })
     )
     .then((plugin) => load(plugin))
@@ -36,7 +36,7 @@ describe('mdx.enrich.lang', async () => {
         lang: document.lang,
         slug: document.slug,
       })).should.match([
-        { lang: "en", slug: ['article_1'] },
+        { lang: undefined, slug: ['article_1'] },
         { lang: "fr", slug: ['path', 'to', 'article_3'] },
         { lang: "fr", slug: ['path', 'to', 'article_5'] },
         { lang: "fr", slug: ['path', 'to', 'article_2'] },

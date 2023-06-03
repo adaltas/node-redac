@@ -10,7 +10,7 @@ The plugin accept one or multiple configurations.
 
 A configuration is an object with the following attributes:
 
-- `collection`: name of the collections.
+- `collection`: default collection name of the document.
 - `target`: path to the directory containing the collections.
 - `pattern`: matching pattern used to extract documents from collections.
 

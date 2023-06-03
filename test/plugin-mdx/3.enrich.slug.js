@@ -29,7 +29,7 @@ describe('mdx.enrich.slug', async () => {
     ])
       .then(() =>
         normalize({
-          config: { target: tmpdir },
+          config: { target: `${tmpdir}/blog` },
         })
       )
       .then((plugin) => load(plugin))
@@ -59,7 +59,7 @@ describe('mdx.enrich.slug', async () => {
     ])
       .then(() =>
         normalize({
-          config: { target: tmpdir },
+          config: { target: `${tmpdir}/blog` },
         })
       )
       .then((plugin) => load(plugin))
@@ -77,12 +77,12 @@ describe('mdx.enrich.slug', async () => {
   it('with root file', async () => {
     await mklayout(tmpdir, [
       ['./blog/index.md'],
-      ['./pages/index.fr.mdx'],
-      ['./pages/index.en.mdx'],
+      ['./blog/section/index.fr.mdx'],
+      ['./blog/section/index.en.mdx'],
     ])
       .then(() =>
         normalize({
-          config: { target: tmpdir },
+          config: { target: `${tmpdir}/blog` },
         })
       )
       .then((plugin) => load(plugin))
@@ -98,9 +98,9 @@ describe('mdx.enrich.slug', async () => {
             `${a.collection}|${a.lang}` > `${b.collection}|${b.lang}` ? 1 : -1
           )
           .should.match([
-            { collection: 'blog', lang: 'en', slug: [] },
-            { collection: 'pages', lang: 'en', slug: [] },
-            { collection: 'pages', lang: 'fr', slug: [] },
+            { collection: 'blog', lang: 'en', slug: ['section'] },
+            { collection: 'blog', lang: 'fr', slug: ['section'] },
+            { collection: 'blog', slug: [] },
           ])
       )
   })

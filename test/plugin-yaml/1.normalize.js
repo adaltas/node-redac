@@ -5,7 +5,7 @@ import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
 import { normalize } from '../../lib/plugin-yaml/index.js'
 
-describe('yaml.load', async () => {
+describe('yaml.normalize', async () => {
   let tmpdir
   let count = 0
   beforeEach(async () => {
