@@ -4,7 +4,7 @@ import os from 'node:os'
 import 'should'
 import dedent from 'dedent'
 import mklayout from '../../lib/utils/mklayout.js'
-import {normalize, source, enrich, parse} from '../../lib/plugin-mdx/index.js'
+import {normalize, load, enrich, parse} from '../../lib/plugin-mdx/index.js'
 
 describe('mdx.parse', async () => {
   let tmpdir
@@ -31,7 +31,7 @@ describe('mdx.parse', async () => {
       ],
     ])
       .then(() => normalize({ config: { target: tmpdir } }))
-      .then((plugin) => source(plugin))
+      .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))
       .then(({ documents }) =>
@@ -57,7 +57,7 @@ describe('mdx.parse', async () => {
       ],
     ])
       .then(() => normalize({ config: { target: tmpdir } }))
-      .then((plugin) => source(plugin))
+      .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))
       .then(({ documents }) =>

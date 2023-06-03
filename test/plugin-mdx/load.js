@@ -3,13 +3,13 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import {normalize, source} from '../../lib/plugin-mdx/index.js'
+import {normalize, load} from '../../lib/plugin-mdx/index.js'
 
-describe('mdx.source', async () => {
+describe('mdx.load', async () => {
   let tmpdir
   let count = 0
   beforeEach(async () => {
-    tmpdir = `${os.tmpdir()}/redac-test-mdx-source-${count++}`
+    tmpdir = `${os.tmpdir()}/redac-test-mdx-load-${count++}`
     try{ await fs.rm(tmpdir, { recursive: true }) } catch {}
     await fs.mkdir(`${tmpdir}`)
   })
@@ -26,7 +26,7 @@ describe('mdx.source', async () => {
           config: { target: tmpdir },
         })
       )
-      .then((plugin) => source(plugin))
+      .then((plugin) => load(plugin))
       .then(({ documents }) =>
         documents.should.match([
           { path_relative: 'blog/article_1.md' },
@@ -44,7 +44,7 @@ describe('mdx.source', async () => {
         config: { target: tmpdir },
       })
     )
-    .then((plugin) => source(plugin))
+    .then((plugin) => load(plugin))
     .then(({ documents }) =>
       documents.should.match([
         { path_relative: 'blog/article_1.md' },
@@ -64,7 +64,7 @@ describe('mdx.source', async () => {
         config: { target: tmpdir },
       })
     )
-    .then((plugin) => source(plugin))
+    .then((plugin) => load(plugin))
     .then(({ documents }) =>
       documents.should.match([
         { path_relative: 'blog/article_1.md' },

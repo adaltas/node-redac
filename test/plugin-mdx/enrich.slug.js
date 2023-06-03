@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import {normalize, source, enrich} from '../../lib/plugin-mdx/index.js'
+import {normalize, load, enrich} from '../../lib/plugin-mdx/index.js'
 import sort from '../../lib/utils/sort.js'
 
 describe('mdx.enrich.slug', async () => {
@@ -32,7 +32,7 @@ describe('mdx.enrich.slug', async () => {
           config: { target: tmpdir },
         })
       )
-      .then((plugin) => source(plugin))
+      .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
       .then(({ documents }) =>
         sort(documents)
@@ -62,7 +62,7 @@ describe('mdx.enrich.slug', async () => {
           config: { target: tmpdir },
         })
       )
-      .then((plugin) => source(plugin))
+      .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
       .then(({ documents }) =>
         documents.should.match([
@@ -85,7 +85,7 @@ describe('mdx.enrich.slug', async () => {
           config: { target: tmpdir },
         })
       )
-      .then((plugin) => source(plugin))
+      .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
       .then(({ documents }) =>
         documents
