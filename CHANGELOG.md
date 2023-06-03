@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/adaltas/node-redac/compare/v0.1.1...v0.2.0) (2023-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* **mdx:** rename cwd attribute to target
+
+### Features
+
+* **engine:** plugin module as a function and an object ([ab12e15](https://github.com/adaltas/node-redac/commit/ab12e15e9dbb7ffbee2a49db6a2f34138f2c52d6))
+* **mdx:** uber property ([bb3545e](https://github.com/adaltas/node-redac/commit/bb3545ece6419a946e130307e11ed1169abd8f5c))
+
+
+* **mdx:** rename cwd attribute to target ([cf64e5c](https://github.com/adaltas/node-redac/commit/cf64e5c947ab64112cf5c3f3517799c5a75aa6ea))
+
 ### [0.1.1](https://github.com/adaltas/node-redac/compare/v0.1.0...v0.1.1) (2023-06-02)
 
 
