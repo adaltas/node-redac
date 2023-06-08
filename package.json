@@ -1,69 +1,17 @@
 {
   "name": "redac",
-  "version": "0.2.0",
-  "description": "Redac is a content authoring library to source content into your website.",
-  "keywords": [
-    "node",
-    "content",
-    "authoring",
-    "editor",
-    "markdown",
-    "mdx",
-    "next.js",
-    "gatsby",
-    "astro",
-    "remix"
-  ],
-  "author": "David Worms <david@adaltas.com> (https://www.adaltas.com)",
-  "bugs": "https://github.com/adaltas/node-redac/issues",
-  "contributors": [
-    "David Worms <david@adaltas.com> (https://www.adaltas.com)"
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
+    "@commitlint/config-lerna-scopes": "^17.6.6",
     "husky": "^8.0.3",
-    "pinst": "^3.0.0",
-    "prettier": "^2.8.8",
-    "should": "^13.2.3",
-    "standard-version": "^9.5.0"
+    "lerna": "^6.6.2"
   },
-  "exports": {
-    ".": "./lib/index.js",
-    "./plugins/mdx": "./lib/plugin-mdx/index.js",
-    "./plugins/memory": "./lib/plugin-memory/index.js",
-    "./plugins/yaml": "./lib/plugin-yaml/index.js"
-  },
-  "license": "MIT",
-  "main": "lib/index.js",
-  "repository": "https://github.com/adaltas/node-redac",
   "scripts": {
-    "release": "standard-version",
-    "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major",
     "postinstall": "husky install",
-    "postrelease": "git push --follow-tags origin master && npm publish",
-    "prepack": "pinst --disable",
-    "postpack": "pinst --enable",
-    "test": "node --test --test-reporter spec test/*.js test/**/*.js"
-  },
-  "type": "module",
-  "dependencies": {
-    "dedent": "^0.7.0",
-    "each": "^2.4.0",
-    "github-slugger": "^2.0.0",
-    "glob": "^10.2.6",
-    "lodash.deburr": "^4.1.0",
-    "mixme": "^0.5.9",
-    "remark-extract-frontmatter": "^3.2.0",
-    "remark-frontmatter": "^4.0.1",
-    "remark-parse": "^10.0.2",
-    "remark-stringify": "^10.0.3",
-    "remark-table-of-content": "^0.1.0",
-    "remark-title-to-frontmatter": "^0.1.7",
-    "unified": "^10.1.2",
-    "unist-util-visit": "^4.1.2",
-    "yaml": "^2.3.1"
+    "test": "lerna run test",
+    "version": "lerna version"
   }
 }
