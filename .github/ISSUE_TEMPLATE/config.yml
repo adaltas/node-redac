@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Redac documentation
+    url: https://redac.js.org/
+    about: Check out the Redac documentation for answers to common questions.
