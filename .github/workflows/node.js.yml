@@ -1,0 +1,63 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Redac CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  list-packages:
+    name: List Packages
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.get-folders.outputs.packages }}
+    steps:
+    - uses: actions/checkout@v3
+    - id: get-folders
+      working-directory: packages
+      shell: bash
+      run: |
+        packages=$(tree -J -d -L 1 | jq -c '.[0].contents | map(.name)')
+        echo "packages=$packages" >> $GITHUB_OUTPUT
+  test:
+    name: Package Test
+    needs: [list-packages]
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false # avoid cancel all in-progress jobs if any fails
+      matrix:
+        node-version: [18.x] 
+        package: ${{ fromJson(needs.list-packages.outputs.packages)}}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install package dependencies
+      run: yarn --frozen-lockfile
+    - name: Test
+      shell: bash
+      run: |
+        if [ ${{ matrix.package }} != redac ]; then
+          npx lerna run test --scope=@redac/${{ matrix.package }}
+        else
+          npx lerna run test --scope=${{ matrix.package }}
+        fi
+  publish:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: yarn install
+    - run: yarn run publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
