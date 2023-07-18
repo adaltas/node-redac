@@ -17,6 +17,7 @@ module.exports = {
         "mdx",
         "memory",
         "project",
+        "release",
         "yaml",
       ],
     ],
