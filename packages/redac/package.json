@@ -9,10 +9,10 @@
     "editor",
     "markdown",
     "mdx",
+    "cms",
+    "headless",
     "next.js",
-    "gatsby",
-    "astro",
-    "remix"
+    "gatsby"
   ],
   "author": "David Worms <david@adaltas.com> (https://www.adaltas.com)",
   "bugs": "https://github.com/adaltas/node-redac/issues",
