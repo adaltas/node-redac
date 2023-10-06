@@ -4,9 +4,9 @@ import sort from './utils/sort.js'
 
 const source = async (plugins) => {
   const documents = []
-  for (const plugin of await plugins){
-    if(plugin.module.source) {
-      documents.push(...await plugin.module.source())
+  for (const plugin of await plugins) {
+    if (plugin.module.source) {
+      documents.push(...(await plugin.module.source()))
     }
   }
   const collections = {}
@@ -16,7 +16,7 @@ const source = async (plugins) => {
       collections[document.collection] = []
     }
     collections[document.collection].push(document)
-  });
+  })
   // Sort collections
   for (const name in collections) {
     collections[name] = sort(collections[name])
@@ -24,19 +24,23 @@ const source = async (plugins) => {
   return collections
 }
 
-export default function engine(plugins=[]) {
+export default function engine(plugins = []) {
   // Configuration normalization
   if (!Array.isArray(plugins)) plugins = [plugins]
   plugins = plugins.map((plugin) => {
     if (Array.isArray(plugin)) {
       return {
         module: plugin[0],
-        config: plugin[1]
+        config: plugin[1],
       }
-    } else if(plugin !== null && typeof plugin === 'object') {
+    } else if (plugin !== null && typeof plugin === 'object') {
       return plugin
     } else {
-      throw Error(`REDAC_INVALID_ARGUMENTS: plugin config must be an object, an array or a string, got ${JSON.stringify(plugin)}.`)
+      throw Error(
+        `REDAC_INVALID_ARGUMENTS: plugin config must be an object, an array or a string, got ${JSON.stringify(
+          plugin
+        )}.`
+      )
     }
   })
   // Load and initialize the plugin with its configuration
@@ -44,7 +48,7 @@ export default function engine(plugins=[]) {
     if (typeof plugin.module === 'string') {
       const module = await import(plugin.module)
       plugin.module = module.default(plugin)
-    }else if (typeof plugin.module === 'function'){
+    } else if (typeof plugin.module === 'function') {
       plugin.module = plugin.module(plugin)
     }
     return plugin
@@ -62,16 +66,20 @@ engine.mdx = (config) => {
     config = {
       module: 'redac/plugins/mdx',
       config: {
-        target: config
-      }
+        target: config,
+      },
     }
   } else if (config !== null && typeof config === 'object') {
     config = {
       module: 'redac/plugins/mdx',
-      config: config
+      config: config,
     }
   } else {
-    throw Error(`REDAC_MDX_INVALID_ARGUMENTS: plugin config must be an object or a string, got ${JSON.stringify(config)}.`)
+    throw Error(
+      `REDAC_MDX_INVALID_ARGUMENTS: plugin config must be an object or a string, got ${JSON.stringify(
+        config
+      )}.`
+    )
   }
   return engine(config)
 }
@@ -81,16 +89,20 @@ engine.memory = (config) => {
     config = {
       module: 'redac/plugins/memory',
       config: {
-        documents: config
-      }
+        documents: config,
+      },
     }
   } else if (config !== null && typeof config === 'object') {
     config = {
       module: 'redac/plugins/memory',
-      config: config
+      config: config,
     }
   } else {
-    throw Error(`REDAC_MEMORY_INVALID_ARGUMENTS: plugin config must be an object, got ${JSON.stringify(config)}.`)
+    throw Error(
+      `REDAC_MEMORY_INVALID_ARGUMENTS: plugin config must be an object, got ${JSON.stringify(
+        config
+      )}.`
+    )
   }
   return engine(config)
 }
@@ -100,18 +112,22 @@ engine.yaml = (config) => {
     config = {
       module: 'redac/plugins/yaml',
       config: {
-        target: config
-      }
+        target: config,
+      },
     }
   } else if (config !== null && typeof config === 'object') {
     config = {
       module: 'redac/plugins/yaml',
       config: {
-        target: config.target
-      }
+        target: config.target,
+      },
     }
   } else {
-    throw Error(`REDAC_YAML_INVALID_ARGUMENTS: plugin config must be an object or a string, got ${JSON.stringify(config)}.`)
+    throw Error(
+      `REDAC_YAML_INVALID_ARGUMENTS: plugin config must be an object or a string, got ${JSON.stringify(
+        config
+      )}.`
+    )
   }
   return engine(config)
 }

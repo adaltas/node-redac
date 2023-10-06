@@ -9,16 +9,16 @@ import stringify from 'remark-stringify'
 import tableOfContent from 'remark-table-of-content'
 import titleToFrontmatter from 'remark-title-to-frontmatter'
 
-export default async function pluginMdxParse (plugin) {
-  const {documents} = plugin
+export default async function pluginMdxParse(plugin) {
+  const { documents } = plugin
   plugin.documents = await each(documents, async (document) => {
-    const { value, data, toc} = await unified()
+    const { value, data, toc } = await unified()
       .use(parse)
       .use(stringify)
       .use(frontmatter)
       .use(extractFrontmatter, { yaml: yaml.parse, throws: true }) // Create file.data property
       .use(titleToFrontmatter)
-      .use(tableOfContent, {depth_min: 2, depth_max: 3})
+      .use(tableOfContent, { depth_min: 2, depth_max: 3 })
       // .use(removeFrontmatter)
       // .use(imagesPath, options.images_path)
       .process(document.content_raw)

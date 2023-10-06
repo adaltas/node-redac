@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import mklayout from '../../lib/utils/mklayout.js'
-import {normalize, load, enrich} from '../../lib/plugin-mdx/index.js'
+import { normalize, load, enrich } from '../../lib/plugin-mdx/index.js'
 import sort from '../../lib/utils/sort.js'
 
 describe('mdx.enrich.slug', async () => {

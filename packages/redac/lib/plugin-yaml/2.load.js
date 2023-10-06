@@ -1,11 +1,13 @@
-import fs from "node:fs/promises"
-import { parse } from "yaml"
-import path from "path"
-import { glob } from "glob"
-import each from "each"
+import fs from 'node:fs/promises'
+import { parse } from 'yaml'
+import path from 'path'
+import { glob } from 'glob'
+import each from 'each'
 
 export default async function pluginYamlLoad(plugin) {
-  const { config: { target, pattern, is_directory } } = plugin
+  const {
+    config: { target, pattern, is_directory },
+  } = plugin
   let documents = is_directory ? await glob(pattern, { cwd: target }) : [target]
   documents = await each(documents, async (file) => {
     const content = await fs.readFile(path.resolve(target, file))

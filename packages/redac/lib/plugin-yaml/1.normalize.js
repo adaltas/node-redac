@@ -1,14 +1,14 @@
-import fs from "node:fs/promises"
-import path from "path"
+import fs from 'node:fs/promises'
+import path from 'path'
 
 export default async function pluginYamlNormalize(plugin) {
   let { config } = plugin
   // Convert string to target
-  if(typeof plugin.config === "string" ){
+  if (typeof plugin.config === 'string') {
     plugin.config = config = { target: plugin.config }
   }
   // Default values
-  config.pattern = config.pattern ?? "**/*.y?(a)ml"
+  config.pattern = config.pattern ?? '**/*.y?(a)ml'
   config.target = config.target ?? process.cwd()
   // Discover the file type, only directories search for yaml files
   const stat = await fs.lstat(config.target)
@@ -26,7 +26,9 @@ export default async function pluginYamlNormalize(plugin) {
       }
     }
   } else {
-    throw Error('REDAC_YAML_INVALID_TARGET_ARGUMENTS: target must be a file or a directory.')
+    throw Error(
+      'REDAC_YAML_INVALID_TARGET_ARGUMENTS: target must be a file or a directory.'
+    )
   }
   return plugin
 }
