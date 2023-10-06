@@ -1,6 +1,6 @@
 {
   "name": "redac",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Redac is a content authoring library to source content into your website.",
   "keywords": [
     "node",
