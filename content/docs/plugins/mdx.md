@@ -46,3 +46,7 @@ Considering the following layout:
 ```
 
 The `./store` target create 2 collections, `articles` and `pages`.
+
+## Overloading with frontmatter
+
+The document slug can be overloaded from the `slug` property in the frontmatter. This is usefull for internationalization where the slug of a translated page may not share the name as the one of the default language. In such case, the page of the default language get its slug from its filename and the translated pages get their slug from the `slug` frontmatter property.
