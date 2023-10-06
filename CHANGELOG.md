@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/adaltas/node-redac/compare/v0.3.0...v0.3.1) (2023-10-06)
+
+
+### Bug Fixes
+
+* **mdx:** mix slug overloading with lang ([a188205](https://github.com/adaltas/node-redac/commit/a188205a259d782d7113e95f002c972f55f67472))
+
+
+
 ## [0.3.0](https://github.com/adaltas/node-redac/compare/v0.2.1...v0.3.0) (2023-10-06)
 
 
