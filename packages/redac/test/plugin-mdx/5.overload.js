@@ -45,4 +45,34 @@ describe('mdx.overload', async () => {
           ])
       )
   })
+  it('slug with lang', async () => {
+    await mklayout(tmpdir, [
+      ['./blog/article_1.en.md', '---\nslug: my-article-1\n---'],
+      ['./blog/article_1.fr.md', '---\nslug: mon-article-1\n---'],
+      ['./blog/path-2/index.en.md', '---\nslug: my-path-3\n---'],
+      ['./blog/path-2/index.fr.md', '---\nslug: mon-chemin-3\n---'],
+      ['./blog/path-2/article_2.en.md', '---\nslug: my-article-3\n---'],
+      ['./blog/path-2/article_2.fr.md', '---\nslug: mon-article-3\n---'],
+    ])
+      .then(() =>
+        normalize({
+          config: { target: `${tmpdir}/blog` },
+        })
+      )
+      .then((plugin) => load(plugin))
+      .then((plugin) => enrich(plugin))
+      .then((plugin) => parse(plugin))
+      .then((plugin) => overload(plugin))
+      .then(
+        ({ documents }) =>
+          documents.should.match([
+            { lang: 'en', slug: ['my-article-1'] },
+            { lang: 'fr', slug: ['mon-article-1'] },
+            { lang: 'en', slug: ['my-path-3', 'my-article-3'] },
+            { lang: 'fr', slug: ['mon-chemin-3', 'mon-article-3'] },
+            { lang: 'en', slug: ['my-path-3'] },
+            { lang: 'fr', slug: ['mon-chemin-3'] },
+          ])
+      )
+  })
 })
