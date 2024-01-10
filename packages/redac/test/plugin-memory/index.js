@@ -1,6 +1,6 @@
-import {describe, it} from 'node:test'
+import { describe, it } from 'node:test'
 import 'should'
-import redac from '../../lib/index.js'
+import redac from 'redac'
 
 describe('memory', async () => {
   it('config is invalid', async () => {

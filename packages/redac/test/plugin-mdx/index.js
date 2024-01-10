@@ -1,6 +1,6 @@
-import {describe, it} from 'node:test'
+import { describe, it } from 'node:test'
 import 'should'
-import redac from '../../lib/index.js'
+import redac from 'redac'
 
 describe('mdx', async () => {
   it('config is invalid', async () => {
@@ -14,12 +14,12 @@ describe('mdx', async () => {
   })
   it('config is a string', async () => {
     const engine = redac.mdx('/path/to/collection')
-    Object.keys(engine).should.eql(['db', 'from'])
+    Object.keys(engine).should.eql(['plugins', 'db', 'from'])
   })
   it('config is an object', async () => {
     const engine = redac.mdx({
       target: '/path/to/collection'
     })
-    Object.keys(engine).should.eql(['db', 'from'])
+    Object.keys(engine).should.eql(['plugins', 'db', 'from'])
   })
 })

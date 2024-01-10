@@ -1,6 +1,6 @@
-import {describe, it} from 'node:test'
+import { describe, it } from 'node:test'
 import 'should'
-import engine from '../lib/index.js'
+import engine from 'redac'
 
 describe('engine.collection.get', async () => {
   it("return undefined if not found", async () => {

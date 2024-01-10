@@ -3,8 +3,8 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import dedent from 'dedent'
+import { normalize, load, enrich, parse } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
-import { normalize, load, enrich, parse } from '../../lib/plugin-mdx/index.js'
 
 describe('mdx.parse', async () => {
   let tmpdir

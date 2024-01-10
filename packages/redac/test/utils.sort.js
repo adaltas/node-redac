@@ -1,6 +1,6 @@
-import { describe, it } from "node:test";
-import "should";
-import sort from "../lib/utils/sort.js";
+import { describe, it } from 'node:test'
+import 'should'
+import sort from '../lib/utils/sort.js'
 
 describe("mdx.sort", async () => {
   it("without sort", async () => {

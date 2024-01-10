@@ -1,10 +1,10 @@
-import {beforeEach, afterEach, describe, it} from 'node:test'
+import { beforeEach, afterEach, describe, it } from 'node:test'
 import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
 import { stringify } from "yaml"
 import mklayout from '../../lib/utils/mklayout.js'
-import { normalize, load } from '../../lib/plugin-yaml/index.js'
+import { normalize, load } from 'redac/plugins/yaml'
 
 describe('yaml.load', async () => {
   let tmpdir

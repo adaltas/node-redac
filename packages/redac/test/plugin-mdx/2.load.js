@@ -1,9 +1,9 @@
-import {beforeEach, afterEach, describe, it} from 'node:test'
+import { beforeEach, afterEach, describe, it } from 'node:test'
 import fs from 'node:fs/promises'
 import os from 'node:os'
 import 'should'
+import { normalize, load } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
-import {normalize, load} from '../../lib/plugin-mdx/index.js'
 
 describe('mdx.load', async () => {
   let tmpdir

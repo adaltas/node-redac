@@ -1,11 +1,11 @@
 import { describe, it } from 'node:test'
 import 'should'
-import engine from '../lib/index.js'
+import engine from 'redac'
 
 describe('engine', async () => {
   it('expose db and from', async () => {
     const eng = await engine()
-    Object.keys(eng).should.eql(['db', 'from'])
+    Object.keys(eng).should.eql(['plugins', 'db', 'from'])
   })
   it('config.module may be a function', async () => {
     await engine([

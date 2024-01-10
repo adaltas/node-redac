@@ -1,6 +1,6 @@
-import { describe, it } from "node:test";
-import "should";
-import engine from "../lib/index.js";
+import { describe, it } from 'node:test'
+import 'should'
+import engine from 'redac'
 
 describe("engine.collection.tree", async () => {
   it("from root with holes", async () => {
