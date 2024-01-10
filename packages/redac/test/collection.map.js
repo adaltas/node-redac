@@ -3,6 +3,7 @@ import 'should'
 import engine from 'redac'
 
 describe('engine.collection.map', async () => {
+
   it('tranform document with one property', async () => {
     (
       await engine.memory({
@@ -29,4 +30,5 @@ describe('engine.collection.map', async () => {
       slug: ['article_2'],
     })
   })
+  
 })

@@ -3,6 +3,7 @@ import 'should'
 import engine from 'redac'
 
 describe('engine.collection.list', async () => {
+
   it("list all documents, no filter", async () => {
     (
       await engine
@@ -35,6 +36,7 @@ describe('engine.collection.list', async () => {
       },
     ]);
   });
+
   it("with `.filter`", async () => {
     (
       await engine
@@ -85,4 +87,5 @@ describe('engine.collection.list', async () => {
       },
     ]);
   });
+  
 })

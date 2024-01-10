@@ -6,6 +6,7 @@ import mklayout from '../../lib/utils/mklayout.js'
 import redac from 'redac'
 
 describe('yaml', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -18,6 +19,7 @@ describe('yaml', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('config is invalid', async () => {
     ;(() => redac.yaml(false)).should.throw(
       [
@@ -27,11 +29,13 @@ describe('yaml', async () => {
       ].join(' ')
     )
   })
+
   it('config is a string', async () => {
     await mklayout(tmpdir, [['./collection.yaml']])
     const engine = await redac.yaml(`${tmpdir}/collection.yaml`)
     Object.keys(engine).should.eql(['plugins', 'db', 'from'])
   })
+
   it('config is an object', async () => {
     await mklayout(tmpdir, [['./collection.yaml']])
     const engine = redac.yaml({
@@ -39,6 +43,7 @@ describe('yaml', async () => {
     })
     Object.keys(engine).should.eql(['plugins', 'db', 'from'])
   })
+
   // it('lang in file', async () => {
   //   await mklayout(tmpdir, [['./blog.fr.yml', 'Articles FR']])
   //     .then(() =>
@@ -64,4 +69,5 @@ describe('yaml', async () => {
   //       ])
   //     )
   // })
+  
 })

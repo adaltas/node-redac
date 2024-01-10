@@ -3,6 +3,7 @@ import 'should'
 import tree from '../lib/utils/tree.js'
 
 describe('functions', async () => {
+
   it('preserve properties', async () => {
     const pages = [
       { slug: ['a'], title: 'a' },
@@ -24,6 +25,7 @@ describe('functions', async () => {
       },
     ])
   })
+
   it('with multiple parent directories', async () => {
     const pages = [
       { slug: ['a'] },
@@ -62,4 +64,5 @@ describe('functions', async () => {
       },
     ])
   })
+  
 })

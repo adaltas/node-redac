@@ -6,6 +6,7 @@ import mklayout from '../../lib/utils/mklayout.js'
 import { normalize } from 'redac/plugins/yaml'
 
 describe('yaml.normalize', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -16,6 +17,7 @@ describe('yaml.normalize', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('config is a string to directory', async () => {
     await mklayout(tmpdir, [["./blog/article_1.yaml"], ["./blog/article_2.yaml"]])
       .then(() =>
@@ -34,6 +36,7 @@ describe('yaml.normalize', async () => {
         })
       )
   })
+
   it('config is a string to file', async () => {
     await mklayout(tmpdir, [['./blog.yaml']])
       .then(() =>
@@ -52,4 +55,5 @@ describe('yaml.normalize', async () => {
         })
       )
   })
+  
 })

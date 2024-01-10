@@ -7,6 +7,7 @@ import { normalize, load, enrich, parse } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('mdx.parse', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -19,6 +20,7 @@ describe('mdx.parse', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('extract title from content', async () => {
     await mklayout(tmpdir, [
       [
@@ -45,6 +47,7 @@ describe('mdx.parse', async () => {
         ])
       )
   })
+
   it('extract toc', async () => {
     await mklayout(tmpdir, [
       [
@@ -74,4 +77,5 @@ describe('mdx.parse', async () => {
         ])
       )
   })
+  
 })

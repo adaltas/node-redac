@@ -6,6 +6,7 @@ import mklayout from '../../lib/utils/mklayout.js'
 import { normalize, load, enrich } from 'redac/plugins/yaml'
 
 describe('yaml.enrich', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -18,6 +19,7 @@ describe('yaml.enrich', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('lang in directory', async () => {
     await mklayout(tmpdir, [
       ['./blog/article.en.yml', 'Article EN'],
@@ -55,6 +57,7 @@ describe('yaml.enrich', async () => {
         ])
       )
   })
+
   it('lang in file', async () => {
     await mklayout(tmpdir, [['./blog.fr.yml', 'Articles FR']])
       .then(() =>
@@ -80,4 +83,5 @@ describe('yaml.enrich', async () => {
         ])
       )
   })
+  
 })

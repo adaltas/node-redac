@@ -3,6 +3,7 @@ import 'should'
 import engine from 'redac'
 
 describe('engine.collection.match', async () => {
+
   it('match a document by slug', async () => {
     (
       await engine
@@ -30,6 +31,7 @@ describe('engine.collection.match', async () => {
       slug: ["article_2"],
     });
   })
+
   it('match a document by lang', async () => {
     (await engine.memory({
       documents: [{
@@ -62,6 +64,7 @@ describe('engine.collection.match', async () => {
       },
     ])
   })
+
   it('match a document by object', async () => {
     (
       await engine.memory({
@@ -86,4 +89,5 @@ describe('engine.collection.match', async () => {
       slug: ['article_2'],
     })
   })
+  
 })

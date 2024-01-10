@@ -6,6 +6,7 @@ import { normalize, load, enrich } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('mdx.enrich.lang', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -16,6 +17,7 @@ describe('mdx.enrich.lang', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+  
   it('extract lang', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],

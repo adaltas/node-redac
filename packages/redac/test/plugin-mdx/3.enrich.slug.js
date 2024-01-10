@@ -7,6 +7,7 @@ import mklayout from '../../lib/utils/mklayout.js'
 import sort from '../../lib/utils/sort.js'
 
 describe('mdx.enrich.slug', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -19,6 +20,7 @@ describe('mdx.enrich.slug', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('extract sort', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -49,6 +51,7 @@ describe('mdx.enrich.slug', async () => {
           ])
       )
   })
+
   it('extract slug', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -74,6 +77,7 @@ describe('mdx.enrich.slug', async () => {
         ])
       )
   })
+
   it('with root file', async () => {
     await mklayout(tmpdir, [
       ['./blog/index.md'],
@@ -104,4 +108,5 @@ describe('mdx.enrich.slug', async () => {
           ])
       )
   })
+  
 })

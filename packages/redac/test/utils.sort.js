@@ -3,6 +3,7 @@ import 'should'
 import sort from '../lib/utils/sort.js'
 
 describe("mdx.sort", async () => {
+
   it("without sort", async () => {
     sort([
       {
@@ -42,6 +43,7 @@ describe("mdx.sort", async () => {
         { slug: ["path", "b_dir", "article_3"] },
       ]);
   });
+
   it("with sort in shared parent", async () => {
     sort([
       {
@@ -76,6 +78,7 @@ describe("mdx.sort", async () => {
         { lang: "fr", slug: ["path", "b_dir", "article_2"]},
       ]);
   });
+
   it("with lang", async () => {
     sort([
       {
@@ -110,4 +113,5 @@ describe("mdx.sort", async () => {
         { lang: "fr", slug: ["article_2"]},
       ]);
   });
+  
 });

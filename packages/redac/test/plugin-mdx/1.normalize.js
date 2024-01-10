@@ -6,6 +6,7 @@ import { normalize } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('mdx.normalize', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -16,6 +17,7 @@ describe('mdx.normalize', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('config is an object', async () => {
     await mklayout(tmpdir, [["./blog/article_1.md"], ["./blog/article_2.md"]])
       .then(() =>
@@ -33,6 +35,7 @@ describe('mdx.normalize', async () => {
         })
       )
   })
+
   it('config is a string', async () => {
     await mklayout(tmpdir, [["./blog/article_1.md"], ["./blog/article_2.md"]])
       .then(() =>
@@ -48,6 +51,7 @@ describe('mdx.normalize', async () => {
         })
       )
   })
+
   it('config.target is invalid, eg a file', async () => {
     await mklayout(tmpdir, [['./blog.md']])
       .then(() =>
@@ -62,4 +66,5 @@ describe('mdx.normalize', async () => {
         'target must be a directory.',
       ].join(' '))
   })
+  
 })

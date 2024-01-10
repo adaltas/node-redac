@@ -3,6 +3,7 @@ import 'should'
 import engine from 'redac'
 
 describe('engine.collection.get', async () => {
+
   it("return undefined if not found", async () => {
     should(
       await engine
@@ -14,6 +15,7 @@ describe('engine.collection.get', async () => {
         .get()
     ).be.undefined();
   });
+
   it("return document if single match", async () => {
     (
       await engine
@@ -31,6 +33,7 @@ describe('engine.collection.get', async () => {
       slug: ["article"],
     });
   });
+
   it('error if more than one document', async () => {
     await engine.memory({
       documents: [{
@@ -47,4 +50,5 @@ describe('engine.collection.get', async () => {
       .get()
     .should.be.rejectedWith('Invalid Query: found more than one element matching the filter.')
   })
+  
 })

@@ -3,6 +3,7 @@ import 'should'
 import redac from 'redac'
 
 describe('memory', async () => {
+  
   it('config is invalid', async () => {
     (() => 
       redac.memory(false)
@@ -12,6 +13,7 @@ describe('memory', async () => {
       'got false.',
     ].join(' '))
   })
+
   it('config.documents is invalid', async () => {
     redac.memory({
       documents: false
@@ -21,4 +23,5 @@ describe('memory', async () => {
       'got false.',
     ].join(' '))
   })
+
 })

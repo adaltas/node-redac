@@ -7,6 +7,7 @@ import mklayout from '../../lib/utils/mklayout.js'
 import sort from '../../lib/utils/sort.js'
 
 describe('mdx.enrich.uber', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -19,6 +20,7 @@ describe('mdx.enrich.uber', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('extract sort', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -50,4 +52,5 @@ describe('mdx.enrich.uber', async () => {
           ])
       )
   })
+  
 })

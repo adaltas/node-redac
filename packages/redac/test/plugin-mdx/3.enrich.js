@@ -6,6 +6,7 @@ import { normalize, load, enrich } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('mdx.enrich', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -18,6 +19,7 @@ describe('mdx.enrich', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('extract collections', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -41,4 +43,5 @@ describe('mdx.enrich', async () => {
         ])
       )
   })
+  
 })

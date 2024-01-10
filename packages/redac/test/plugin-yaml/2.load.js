@@ -7,6 +7,7 @@ import mklayout from '../../lib/utils/mklayout.js'
 import { normalize, load } from 'redac/plugins/yaml'
 
 describe('yaml.load', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -17,6 +18,7 @@ describe('yaml.load', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('directory', async () => {
     await mklayout(tmpdir, [
       ["./blog/article_1.yml", "Article 1"],
@@ -45,6 +47,7 @@ describe('yaml.load', async () => {
         ])
       )
   })
+
   it('file', async () => {
     await mklayout(tmpdir, [['./blog.yaml', 'Articles']])
       .then(() =>
@@ -65,4 +68,5 @@ describe('yaml.load', async () => {
         ])
       )
   })
+  
 })

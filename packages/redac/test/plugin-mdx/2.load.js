@@ -6,6 +6,7 @@ import { normalize, load } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('mdx.load', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -16,6 +17,7 @@ describe('mdx.load', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('config is an object', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -34,6 +36,7 @@ describe('mdx.load', async () => {
         ])
       )
   })
+
   it('config is a string', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -52,6 +55,7 @@ describe('mdx.load', async () => {
       ])
     )
   })
+
   it('filter .md and .mdx extension', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md'],
@@ -72,4 +76,5 @@ describe('mdx.load', async () => {
       ])
     )
   })
+  
 })

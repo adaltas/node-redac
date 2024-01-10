@@ -6,6 +6,7 @@ import { normalize, load, enrich, parse, overload } from 'redac/plugins/mdx'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('mdx.overload', async () => {
+
   let tmpdir
   let count = 0
   beforeEach(async () => {
@@ -18,6 +19,7 @@ describe('mdx.overload', async () => {
   afterEach(async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
+
   it('slug from metadata', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.md', '---\nslug: my-article-1\n---'],
@@ -44,6 +46,7 @@ describe('mdx.overload', async () => {
           ])
       )
   })
+
   it('slug with lang', async () => {
     await mklayout(tmpdir, [
       ['./blog/article_1.en.md', '---\nslug: my-article-1\n---'],
@@ -74,4 +77,5 @@ describe('mdx.overload', async () => {
           ])
       )
   })
+  
 })
