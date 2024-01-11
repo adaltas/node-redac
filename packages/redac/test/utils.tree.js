@@ -1,5 +1,3 @@
-import { describe, it } from 'node:test'
-import 'should'
 import tree from '../lib/utils/tree.js'
 
 describe('functions', async () => {

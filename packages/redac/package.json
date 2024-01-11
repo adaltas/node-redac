@@ -39,6 +39,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "should": "^13.2.3"
   },
@@ -52,10 +53,20 @@
     "/lib"
   ],
   "license": "MIT",
+  "mocha": {
+    "inline-diffs": true,
+    "recursive": true,
+    "reporter": "spec",
+    "require": [
+      "should"
+    ],
+    "throw-deprecation": true,
+    "timeout": 1000
+  },
   "main": "lib/index.js",
   "repository": "https://github.com/adaltas/node-redac",
   "scripts": {
-    "test": "node --test --test-reporter spec test/*.js test/**/*.js"
+    "test": "mocha 'test/**/*.js'"
   },
   "type": "module"
 }

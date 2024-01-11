@@ -1,5 +1,3 @@
-import { describe, it } from 'node:test'
-import 'should'
 import redac from 'redac'
 
 describe('memory', async () => {

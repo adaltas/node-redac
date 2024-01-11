@@ -1,5 +1,3 @@
-import { describe, it } from 'node:test'
-import 'should'
 import engine from 'redac'
 
 describe('engine.collection.list', async () => {
