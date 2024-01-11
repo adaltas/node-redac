@@ -16,8 +16,11 @@ describe('mdx.normalize', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
 
-  it('config is an object', async () => {
-    await mklayout(tmpdir, [["./blog/article_1.md"], ["./blog/article_2.md"]])
+  it('config is an object', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [['./blog/article_1.md'], ['./blog/article_2.md']])
+      )
       .then(() =>
         normalize({
           config: {
@@ -32,10 +35,13 @@ describe('mdx.normalize', async () => {
           target: `${tmpdir}/blog`,
         })
       )
-  })
+  )
 
-  it('config is a string', async () => {
-    await mklayout(tmpdir, [["./blog/article_1.md"], ["./blog/article_2.md"]])
+  it('config is a string', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [['./blog/article_1.md'], ['./blog/article_2.md']])
+      )
       .then(() =>
         normalize({
           config: `${tmpdir}/blog`,
@@ -43,15 +49,17 @@ describe('mdx.normalize', async () => {
       )
       .then(({ config }) =>
         config.should.match({
-          collection: "blog",
-          pattern: "**/*.md?(x)",
+          collection: 'blog',
+          pattern: '**/*.md?(x)',
           target: `${tmpdir}/blog`,
         })
-      )
-  })
+      ))
 
-  it('config.target is invalid, eg a file', async () => {
-    await mklayout(tmpdir, [['./blog.md']])
+  it('config.target is invalid, eg a file', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [['./blog.md']])
+      )
       .then(() =>
         normalize({
           config: {
@@ -63,6 +71,6 @@ describe('mdx.normalize', async () => {
         'REDAC_MDX_INVALID_TARGET_ARGUMENTS:',
         'target must be a directory.',
       ].join(' '))
-  })
+  )
   
 })

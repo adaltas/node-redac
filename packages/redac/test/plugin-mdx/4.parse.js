@@ -19,17 +19,20 @@ describe('mdx.parse', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
 
-  it('extract title from content', async () => {
-    await mklayout(tmpdir, [
-      [
-        './blog/article_1.md',
-        dedent`
-          # Heading 1
-          Some content
-          ## Heading 2
-        `,
-      ],
-    ])
+  it('extract title from content', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          [
+            './blog/article_1.md',
+            dedent`
+            # Heading 1
+            Some content
+            ## Heading 2
+          `,
+          ],
+        ])
+      )
       .then(() => normalize({ config: { target: tmpdir } }))
       .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
@@ -43,20 +46,22 @@ describe('mdx.parse', async () => {
             },
           },
         ])
-      )
-  })
+      ))
 
-  it('extract toc', async () => {
-    await mklayout(tmpdir, [
-      [
-        './blog/article_1.md',
-        dedent`
-          # Heading 1
-          Some content
-          ## Heading 2
-        `,
-      ],
-    ])
+  it('extract toc', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          [
+            './blog/article_1.md',
+            dedent`
+              # Heading 1
+              Some content
+              ## Heading 2
+            `,
+          ],
+        ])
+      )
       .then(() => normalize({ config: { target: tmpdir } }))
       .then((plugin) => load(plugin))
       .then((plugin) => enrich(plugin))
@@ -73,7 +78,6 @@ describe('mdx.parse', async () => {
             ],
           },
         ])
-      )
-  })
+      ))
   
 })

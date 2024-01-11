@@ -17,11 +17,14 @@ describe('yaml.load', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
 
-  it('directory', async () => {
-    await mklayout(tmpdir, [
-      ["./blog/article_1.yml", "Article 1"],
-      ["./blog/article_2.yaml", stringify("Article 2")],
-    ])
+  it('directory', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ["./blog/article_1.yml", "Article 1"],
+          ["./blog/article_2.yaml", stringify("Article 2")],
+        ])
+      )
       .then(() =>
         normalize({
           config: {
@@ -44,10 +47,15 @@ describe('yaml.load', async () => {
           }
         ])
       )
-  })
+  )
 
-  it('file', async () => {
-    await mklayout(tmpdir, [['./blog.yaml', 'Articles']])
+  it('file', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog.yaml', 'Articles']
+        ])
+      )
       .then(() =>
         normalize({
           config: {
@@ -65,6 +73,6 @@ describe('yaml.load', async () => {
           },
         ])
       )
-  })
+  )
   
 })

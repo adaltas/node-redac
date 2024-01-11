@@ -19,8 +19,6 @@ export default async function pluginMdxParse(plugin) {
       .use(extractFrontmatter, { yaml: yaml.parse, throws: true }) // Create file.data property
       .use(titleToFrontmatter)
       .use(tableOfContent, { depth_min: 2, depth_max: 3 })
-      // .use(removeFrontmatter)
-      // .use(imagesPath, options.images_path)
       .process(document.content_raw)
     return merge(document, {
       content_md: value,

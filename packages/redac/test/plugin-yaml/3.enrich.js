@@ -18,11 +18,14 @@ describe('yaml.enrich', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
 
-  it('lang in directory', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article.en.yml', 'Article EN'],
-      ['./blog/article.fr.yaml', 'Article FR'],
-    ])
+  it('lang in directory', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog/article.en.yml', 'Article EN'],
+          ['./blog/article.fr.yaml', 'Article FR'],
+        ])
+      )
       .then(() =>
         normalize({
           config: {
@@ -54,10 +57,11 @@ describe('yaml.enrich', async () => {
           },
         ])
       )
-  })
+  )
 
-  it('lang in file', async () => {
-    await mklayout(tmpdir, [['./blog.fr.yml', 'Articles FR']])
+  it('lang in file', async () =>
+    Promise.resolve()
+      .then(() => mklayout(tmpdir, [['./blog.fr.yml', 'Articles FR']]))
       .then(() =>
         normalize({
           config: {
@@ -79,7 +83,6 @@ describe('yaml.enrich', async () => {
             slug: [],
           },
         ])
-      )
-  })
+      ))
   
 })

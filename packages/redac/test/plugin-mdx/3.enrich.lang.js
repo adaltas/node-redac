@@ -16,14 +16,17 @@ describe('mdx.enrich.lang', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
   
-  it('extract lang', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article_1.md'],
-      ['./blog/path/to/article_2/index.fr.mdx'],
-      ['./blog/path/to/01.article_3/index.fr.mdx'],
-      ['./blog/path/to/article_4.fr.mdx'],
-      ['./blog/path/to/02.article_5.fr.mdx'],
-    ])
+  it('extract lang', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog/article_1.md'],
+          ['./blog/path/to/article_2/index.fr.mdx'],
+          ['./blog/path/to/01.article_3/index.fr.mdx'],
+          ['./blog/path/to/article_4.fr.mdx'],
+          ['./blog/path/to/02.article_5.fr.mdx'],
+        ])
+      )
     .then(() =>
       normalize({
         config: { target: `${tmpdir}/blog` },
@@ -43,6 +46,6 @@ describe('mdx.enrich.lang', async () => {
         { lang: "fr", slug: ['path', 'to', 'article_4'] },
       ])
     )
-  })
+  )
 
 })

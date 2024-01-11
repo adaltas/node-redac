@@ -38,7 +38,6 @@ export default function pluginMdxEnrich(plugin) {
       lastSlugElements = document.slug[document.slug.length - 1].split('.')
     }
     // Extract sorting key
-    // const sort = [collection, ...slug.slice(0, slug.length - 1), lastSlugElements.join('.')]
     const sort = lastSlugElements.join('.')
     if (/^\d+$/.test(lastSlugElements[0])) {
       lastSlugElements.shift()
@@ -60,7 +59,6 @@ export default function pluginMdxEnrich(plugin) {
       ...document,
       lang: lang,
       sort: sort,
-      // slug: slug,
     }
   })
   return plugin

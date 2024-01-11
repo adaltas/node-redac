@@ -26,6 +26,7 @@
     "glob": "^10.2.6",
     "lodash.deburr": "^4.1.0",
     "mixme": "^0.5.9",
+    "plug-and-play": "^2.5.6",
     "remark-extract-frontmatter": "^3.2.0",
     "remark-frontmatter": "^4.0.1",
     "remark-parse": "^10.0.2",

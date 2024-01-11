@@ -7,11 +7,14 @@ describe('engine', async () => {
     Object.keys(eng).should.eql(['plugins', 'db', 'from'])
   })
 
-  it('config.module may be a function', async () => {
-    await engine([
+  it('config.plugins.plugin is a function', async () =>
+    engine([
       {
-        module: ({config}) => ({
-          source: () => config.documents,
+        plugin: (config) => ({
+          hooks: {
+            'engine:source': ({ documents }) =>
+              documents.push(...config.documents),
+          },
         }),
         config: {
           documents: [
@@ -32,32 +35,35 @@ describe('engine', async () => {
       .from('blog')
       .list()
       .map(({ lang }) => lang)
-      .should.be.resolvedWith(['en', 'fr'])
-  })
+      .should.be.resolvedWith(['en', 'fr']))
 
-  it('config.module may be an object', async () => {
-    await engine([
+  it('config.plugins.plugin is an object', async () =>
+    engine([
       {
-        module: {
-          source: () => [
-            {
-              collection: 'blog',
-              slug: ['article'],
-              lang: 'en',
-            },
-            {
-              collection: 'blog',
-              slug: ['article'],
-              lang: 'fr',
-            },
-          ],
+        plugin: {
+          hooks: {
+            'engine:source': ({ documents }) =>
+              documents.push(
+                ...[
+                  {
+                    collection: 'blog',
+                    slug: ['article'],
+                    lang: 'en',
+                  },
+                  {
+                    collection: 'blog',
+                    slug: ['article'],
+                    lang: 'fr',
+                  },
+                ]
+              ),
+          },
         },
       },
     ])
       .from('blog')
       .list()
       .map(({ lang }) => lang)
-      .should.be.resolvedWith(['en', 'fr'])
-  })
+      .should.be.resolvedWith(['en', 'fr']))
   
 })

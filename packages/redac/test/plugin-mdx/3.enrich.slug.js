@@ -19,14 +19,17 @@ describe('mdx.enrich.slug', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
 
-  it('extract sort', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article_1.md'],
-      ['./blog/01.path/01.b_dir/article_2/index.fr.mdx'],
-      ['./blog/01.path/01.b_dir/01.article_3/index.fr.mdx'],
-      ['./blog/01.path/02.a_dir/article_4.fr.mdx'],
-      ['./blog/01.path/02.a_dir/02.article_5.fr.mdx'],
-    ])
+  it('extract sort', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog/article_1.md'],
+          ['./blog/01.path/01.b_dir/article_2/index.fr.mdx'],
+          ['./blog/01.path/01.b_dir/01.article_3/index.fr.mdx'],
+          ['./blog/01.path/02.a_dir/article_4.fr.mdx'],
+          ['./blog/01.path/02.a_dir/02.article_5.fr.mdx'],
+        ])
+      )
       .then(() =>
         normalize({
           config: { target: `${tmpdir}/blog` },
@@ -47,17 +50,19 @@ describe('mdx.enrich.slug', async () => {
             { slug: ['path', 'b_dir', 'article_3'], sort: '01.article_3' },
             { slug: ['path', 'b_dir', 'article_2'], sort: 'article_2' },
           ])
-      )
-  })
+      ))
 
-  it('extract slug', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article_1.md'],
-      ['./blog/path/to/article_2/index.fr.mdx'],
-      ['./blog/path/to/01.article_3/index.fr.mdx'],
-      ['./blog/path/to/article_4.fr.mdx'],
-      ['./blog/path/to/02.article_5.fr.mdx'],
-    ])
+  it('extract slug', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog/article_1.md'],
+          ['./blog/path/to/article_2/index.fr.mdx'],
+          ['./blog/path/to/01.article_3/index.fr.mdx'],
+          ['./blog/path/to/article_4.fr.mdx'],
+          ['./blog/path/to/02.article_5.fr.mdx'],
+        ])
+      )
       .then(() =>
         normalize({
           config: { target: `${tmpdir}/blog` },
@@ -74,14 +79,17 @@ describe('mdx.enrich.slug', async () => {
           { slug: ['path', 'to', 'article_4'] },
         ])
       )
-  })
+  )
 
-  it('with root file', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/index.md'],
-      ['./blog/section/index.fr.mdx'],
-      ['./blog/section/index.en.mdx'],
-    ])
+  it('with root file', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog/index.md'],
+          ['./blog/section/index.fr.mdx'],
+          ['./blog/section/index.en.mdx'],
+        ])
+      )
       .then(() =>
         normalize({
           config: { target: `${tmpdir}/blog` },
@@ -105,6 +113,6 @@ describe('mdx.enrich.slug', async () => {
             { collection: 'blog', slug: [] },
           ])
       )
-  })
+  )
   
 })

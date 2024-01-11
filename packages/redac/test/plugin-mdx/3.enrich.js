@@ -18,13 +18,16 @@ describe('mdx.enrich', async () => {
     await fs.rm(tmpdir, { recursive: true })
   })
 
-  it('extract collections', async () => {
-    await mklayout(tmpdir, [
-      ['./blog/article_1.md'],
-      ['./blog/article_2.md'],
-      // Leave this in case config.target accept array
-      // ['./pages/page_1.mdx'],
-    ])
+  it('extract collections', async () =>
+    Promise.resolve()
+      .then(() =>
+        mklayout(tmpdir, [
+          ['./blog/article_1.md'],
+          ['./blog/article_2.md'],
+          // Leave this in case config.target accept array
+          // ['./pages/page_1.mdx'],
+        ])
+      )
       .then(() =>
         normalize({
           config: { target: `${tmpdir}/blog` },
@@ -39,7 +42,6 @@ describe('mdx.enrich', async () => {
           { collection: 'blog', slug: ['article_2'] },
           // { collection: 'pages', slug: ['page_1'] },
         ])
-      )
-  })
+      ))
   
 })
