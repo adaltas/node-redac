@@ -5,15 +5,15 @@ export default function collection(engine, collection) {
   const stack = []
   const promise = new Promise((resolve, reject) => {
     setImmediate(async () => {
-      let documents = (await engine.db())[collection] ?? []
-      try {
+      try{
+        let documents = (await engine.db())[collection] ?? []
         for (const fn of stack) {
           documents = await fn(documents)
         }
-      } catch (error) {
-        return reject(error)
+        resolve(documents)
+      }catch(error){
+        reject(error)
       }
-      resolve(documents)
     })
   })
   promise.match = (...args) => {
