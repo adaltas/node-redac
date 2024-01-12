@@ -46,6 +46,20 @@ describe('yaml', async () => {
       .then((engine) =>
         Object.keys(engine).should.eql(['plugins', 'db', 'from', 'yaml'])
       ))
+  
+  it('load documents', async () =>
+    Promise.resolve()
+      .then(() => mklayout(tmpdir, [['./tags.yaml', 'Tags']]))
+      .then(async () =>
+        redac([redacYaml])
+          .yaml(`${tmpdir}/tags.yaml`)
+          .from('tags')
+          .list()
+          .should.be.finally.match([{
+            collection: 'tags',
+            slug: []
+          }])
+      ))
 
   // it('lang in file', async () => {
   //   await mklayout(tmpdir, [['./blog.fr.yml', 'Articles FR']])

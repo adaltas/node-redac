@@ -1,3 +1,4 @@
+import each from 'each'
 import step_1_normalize from './1.normalize.js'
 import step_2_load from './2.load.js'
 import step_3_enrich from './3.enrich.js'
@@ -12,7 +13,9 @@ const getConfigs = (config) => {
       return {
         target: config,
       }
-    } else if (config === null || typeof config !== 'object') {
+    } else if (config !== null && typeof config === 'object') {
+      return config
+    } else {
       throw Error(
         `REDAC_MDX_INVALID_ARGUMENTS: plugin config must be an object or a string, got ${JSON.stringify(
           config
@@ -34,18 +37,16 @@ export default (config) => {
           return engine
         }
       },
-      'engine:source': async ({documents}) => {
-        configs.forEach( config => {
-          docs = async () =>
-            step_1_normalize({ config })
-              .then(step_2_load)
-              .then(step_3_enrich)
-              .then(step_4_parse)
-              .then(step_5_overload)
-              .then(({ documents }) => documents)
+      'engine:source': async ({documents}) =>
+        each(configs, true, async (config) => {
+          const docs = await step_1_normalize({ config })
+            .then(step_2_load)
+            .then(step_3_enrich)
+            .then(step_4_parse)
+            .then(step_5_overload)
+            .then(({ documents }) => documents)
           documents.push(...docs)
         })
-      }
     }
   }
 }
