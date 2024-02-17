@@ -30,7 +30,7 @@ redac.yaml('path/to/my_collection')
 
 It creates a new `my_collection` collection with as many documents as the files matching the `pattern` attribute.
 
-## Uber collection
+## Option `uber`
 
 With the `uber` attribute, each child directory is interpreted as a collection. In such case, the document's collection is named after the child directory.
 
@@ -46,6 +46,10 @@ Considering the following layout:
 ```
 
 The `./store` target create 2 collections, `articles` and `pages`.
+
+## Option `image_src`
+
+By default, the `node.url` attribute in markdown, corresponding to the image `src` attributes, are left untouched. When `image_src` is `true`, all `src` attribute are replaced with the absolute path starting with the collection. When `image_src` is a function, the function receives the `config`, `document` and `node` arguments and it shall return the new `node.url`.
 
 ## Overloading with frontmatter
 

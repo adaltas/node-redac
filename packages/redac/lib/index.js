@@ -1,4 +1,3 @@
-import each from 'each'
 import { plugandplay } from 'plug-and-play'
 import collection from './collection.js'
 import sort from './utils/sort.js'
