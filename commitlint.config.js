@@ -1,8 +1,6 @@
-const {
-  utils: { getPackages },
-} = require("@commitlint/config-lerna-scopes");
+import scopes from "@commitlint/config-lerna-scopes";
 
-module.exports = {
+export default {
   extends: [
     "@commitlint/config-conventional",
     "@commitlint/config-lerna-scopes",
@@ -12,7 +10,7 @@ module.exports = {
       2,
       "always",
       [
-        ...(await getPackages(ctx)),
+        ...(await scopes.utils.getPackages(ctx)),
         "engine",
         "mdx",
         "memory",
