@@ -5,16 +5,16 @@ import sort from './utils/sort.js'
 export default function engine(plugins = []) {
   // Configuration normalization
   if (!Array.isArray(plugins)) plugins = [plugins]
-  plugins = plugins.map( (plugin) => {
-    if (typeof plugin === 'function' ) {
+  plugins = plugins.map((plugin) => {
+    if (typeof plugin === 'function') {
       return plugin()
     } else if (plugin !== null && typeof plugin === 'object') {
-      if(typeof plugin.plugin === 'function'){
+      if (typeof plugin.plugin === 'function') {
         return plugin.plugin.call(null, plugin.config)
       } else if (plugin.plugin !== null && typeof plugin.plugin === 'object') {
         return plugin.plugin
       } else {
-        `REDAC_INVALID_ARGUMENTS: plugin config must be an object or a function, got ${JSON.stringify(
+        ;`REDAC_INVALID_ARGUMENTS: plugin config must be an object or a function, got ${JSON.stringify(
           plugin
         )}.`
       }
@@ -29,7 +29,7 @@ export default function engine(plugins = []) {
   // Load the engine
   const engine = {
     plugins: plugandplay({
-      plugins: plugins
+      plugins: plugins,
     }),
     db: async () => {
       const documents = []
@@ -41,8 +41,8 @@ export default function engine(plugins = []) {
         // Default implementation
         handler: ({ documents }) => {
           // Use the source hook to discover and return documents
-        }
-      });
+        },
+      })
       const collections = {}
       // Group by collection
       documents.forEach((document) => {
@@ -65,9 +65,9 @@ export default function engine(plugins = []) {
     // Expose arguments to plugins authors
     args: { engine },
     // Default implementation
-    handler: ({engine}) => {
+    handler: ({ engine }) => {
       // Use the init hook to register properties to engine
-    }
-  });
+    },
+  })
   return engine
 }

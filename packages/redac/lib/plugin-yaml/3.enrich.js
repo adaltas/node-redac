@@ -1,8 +1,4 @@
-import fs from 'node:fs/promises'
-import { parse } from 'yaml'
 import path from 'path'
-import { glob } from 'glob'
-import each from 'each'
 
 export default function pluginYamlEnrich(plugin) {
   const { config, documents } = plugin

@@ -12,8 +12,8 @@ export default async function mklayout(tmpdir, pages) {
     await fs.writeFile(
       path_relative,
       frontmatter +
-      (content || '') +
-      ((content || '').endsWith('\n') ? '' : '\n')
+        (content || '') +
+        ((content || '').endsWith('\n') ? '' : '\n')
     )
   }
 }

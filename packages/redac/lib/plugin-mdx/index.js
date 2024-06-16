@@ -6,9 +6,9 @@ import step_4_parse from './4.parse.js'
 import step_5_overload from './5.overload.js'
 
 const getConfigs = (config) => {
-  if(config == null) return []
-  if(!Array.isArray(config)) config = [config]
-  return config.map( config => {
+  if (config == null) return []
+  if (!Array.isArray(config)) config = [config]
+  return config.map((config) => {
     if (typeof config === 'string') {
       return {
         target: config,
@@ -37,7 +37,7 @@ export default (config) => {
           return engine
         }
       },
-      'engine:source': async ({documents}) =>
+      'engine:source': async ({ documents }) =>
         each(configs, true, async (config) => {
           const docs = await step_1_normalize({ config })
             .then(step_2_load)
@@ -46,8 +46,8 @@ export default (config) => {
             .then(step_5_overload)
             .then(({ documents }) => documents)
           documents.push(...docs)
-        })
-    }
+        }),
+    },
   }
 }
 

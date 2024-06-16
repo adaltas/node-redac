@@ -34,7 +34,11 @@ const imageSrc = ({ document, config }) => {
       }
     })
     await each(nodes, async (node) => {
-      node.url = await config.image_src.call(null, {config: config, document: document, node: node})
+      node.url = await config.image_src.call(null, {
+        config: config,
+        document: document,
+        node: node,
+      })
     })
   }
 }
