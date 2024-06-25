@@ -1,11 +1,23 @@
 import engine from 'redac'
 
 describe('engine', async () => {
-
   it('expose db and from', async () => {
     const eng = await engine()
     Object.keys(eng).should.eql(['plugins', 'db', 'from'])
   })
+
+  it('config.plugins.plugin is invalid', async () =>
+    (() =>
+      engine([
+        {
+          plugin: false,
+        },
+      ])).should.throw(
+      [
+        'REDAC_INVALID_ARGUMENTS: plugin property must be an object or a function,',
+        'got {"plugin":false}.',
+      ].join(' ')
+    ))
 
   it('config.plugins.plugin is a function', async () =>
     engine([
@@ -65,5 +77,4 @@ describe('engine', async () => {
       .list()
       .map(({ lang }) => lang)
       .should.be.resolvedWith(['en', 'fr']))
-  
 })

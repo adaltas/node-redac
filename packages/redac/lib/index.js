@@ -14,9 +14,9 @@ export default function engine(plugins = []) {
       } else if (plugin.plugin !== null && typeof plugin.plugin === 'object') {
         return plugin.plugin
       } else {
-        ;`REDAC_INVALID_ARGUMENTS: plugin config must be an object or a function, got ${JSON.stringify(
+        throw Error(`REDAC_INVALID_ARGUMENTS: plugin property must be an object or a function, got ${JSON.stringify(
           plugin
-        )}.`
+        )}.`)
       }
     } else {
       throw Error(
