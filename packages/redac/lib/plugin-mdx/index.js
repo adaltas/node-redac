@@ -39,7 +39,8 @@ export default (config) => {
       },
       'engine:source': async ({ documents }) =>
         each(configs, true, async (config) => {
-          const docs = await step_1_normalize({ config })
+          const docs = await Promise.resolve({ config })
+            .then(step_1_normalize)
             .then(step_2_load)
             .then(step_3_enrich)
             .then(step_4_parse)
