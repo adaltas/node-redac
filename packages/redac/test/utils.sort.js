@@ -1,6 +1,6 @@
 import sort from '../lib/utils/sort.js'
 
-describe("mdx.sort", async () => {
+describe("utils.sort", async () => {
 
   it("without sort", async () => {
     sort([
@@ -109,6 +109,41 @@ describe("mdx.sort", async () => {
         { lang: "en", slug: ["article_2"]},
         { lang: "fr", slug: ["article_1"]},
         { lang: "fr", slug: ["article_2"]},
+      ]);
+  });
+
+  it("tree slug number as index", async () => {
+    sort([
+      {
+        lang: "fr",
+        sort: "article_2",
+        slug: [2],
+      },
+      {
+        lang: "en",
+        sort: "article_2",
+        slug: [2],
+      },
+      {
+        lang: "en",
+        sort: "article_1",
+        slug: [1],
+      },
+      {
+        lang: "fr",
+        sort: "article_1",
+        slug: [1],
+      },
+    ])
+      .map((document) => ({
+        slug: document.slug,
+        lang: document.lang,
+      }))
+      .should.eql([
+        { lang: "en", slug: [1]},
+        { lang: "en", slug: [2]},
+        { lang: "fr", slug: [1]},
+        { lang: "fr", slug: [2]},
       ]);
   });
   

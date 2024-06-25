@@ -1,8 +1,7 @@
 
 # Plugin YAML
 
-The plugin search for YAML files inside a target directory. By default, only the files
-matching the `.yml` and `.yaml` extensions are converted to documents.
+The plugin search for YAML files inside a target directory. By default, only the files matching the `.yml` and `.yaml` extensions are converted to documents.
 
 ## Configuration
 

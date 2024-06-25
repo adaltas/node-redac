@@ -35,7 +35,11 @@ export default (config) => {
       },
       'engine:source': async ({documents}) => {
         configs.forEach( config => {
-          documents.push(...config.documents)
+          documents.push(...config.documents.map((document, i) => {
+            document.collection ??= config.collection
+            document.slug ??= [i+1]
+            return document
+          }))
         })
       }
     }

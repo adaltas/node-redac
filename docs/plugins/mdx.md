@@ -1,8 +1,7 @@
 
 # Plugin MDX
 
-The plugin search for MDX files inside a root directory. By default, only the files
-matching the `.md` and `.mdx` extensions are converted to documents.
+The plugin search for MDX files inside a root directory. By default, only the files matching the `.md` and `.mdx` extensions are converted to documents.
 
 ## Configuration
 

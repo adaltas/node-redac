@@ -1,6 +1,6 @@
 import tree from '../lib/utils/tree.js'
 
-describe('functions', async () => {
+describe('utils.tree', async () => {
 
   it('preserve properties', async () => {
     const pages = [
@@ -56,6 +56,28 @@ describe('functions', async () => {
           },
           {
             slug: ['b', 'b'],
+            children: [],
+          },
+        ],
+      },
+    ])
+  })
+
+  it('treat number as index', async () => {
+    const pages = [
+      { slug: [1], title: 'a' },
+      { slug: [2], title: 'b' },
+      { slug: [2, 3], title: 'c' },
+    ]
+    tree(pages).should.match([
+      { title: 'a', slug: [1], children: [] },
+      {
+        title: 'b',
+        slug: [2],
+        children: [
+          {
+            title: 'c',
+            slug: [2, 3],
             children: [],
           },
         ],
