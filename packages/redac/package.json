@@ -20,31 +20,33 @@
     "David Worms <david@adaltas.com> (https://www.adaltas.com)"
   ],
   "dependencies": {
+    "chokidar": "^4.0.3",
     "dedent": "^1.5.3",
-    "each": "^2.7.0",
+    "each": "^2.7.2",
     "github-slugger": "^2.0.0",
-    "glob": "^10.4.1",
+    "glob": "^11.0.1",
     "lodash.deburr": "^4.1.0",
     "mixme": "^1.1.0",
     "plug-and-play": "^2.5.8",
     "remark": "^15.0.1",
     "remark-extract-frontmatter": "^3.2.0",
     "remark-frontmatter": "^5.0.0",
-    "remark-mdx": "^3.0.1",
+    "remark-mdx": "^3.1.0",
     "remark-table-of-content": "^0.4.0",
     "remark-title-to-frontmatter": "^0.1.10",
     "unist-util-visit": "^5.0.0",
-    "yaml": "^2.4.5"
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "mocha": "^10.4.0",
-    "prettier": "^3.3.2",
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "mocha": "^11.1.0",
+    "prettier": "^3.4.2",
     "should": "^13.2.3"
   },
   "exports": {
     ".": "./lib/index.js",
+    "./next": "./lib/next.js",
     "./plugins/mdx": "./lib/plugin-mdx/index.js",
     "./plugins/memory": "./lib/plugin-memory/index.js",
     "./plugins/yaml": "./lib/plugin-yaml/index.js"

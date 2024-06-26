@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import { parse } from 'yaml'
-import path from 'path'
+import path from 'node:path'
 import { glob } from 'glob'
 import each from 'each'
 

@@ -3,6 +3,7 @@ import path from 'node:path'
 import yaml from 'yaml'
 
 export default async function mklayout(tmpdir, pages) {
+  const results = []
   for (const [location, content, metadata] of pages) {
     const path_relative = path.resolve(tmpdir, location)
     await fs.mkdir(path.dirname(path_relative), { recursive: true })
@@ -15,5 +16,10 @@ export default async function mklayout(tmpdir, pages) {
         (content || '') +
         ((content || '').endsWith('\n') ? '' : '\n')
     )
+    results.push({
+      path_absolute: path.resolve(process.cwd(), path_relative),
+      path_relative: location,
+    })
   }
+  return results
 }

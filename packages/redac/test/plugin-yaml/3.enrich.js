@@ -4,14 +4,11 @@ import { normalize, load, enrich } from 'redac/plugins/yaml'
 import mklayout from '../../lib/utils/mklayout.js'
 
 describe('yaml.enrich', async () => {
-
   let tmpdir
   let count = 0
   beforeEach(async () => {
     tmpdir = `${os.tmpdir()}/redac-test-yaml-enrich-${count++}`
-    try {
-      await fs.rm(tmpdir, { recursive: true })
-    } catch {}
+    await fs.rm(tmpdir, { recursive: true }).catch(() => {})
     await fs.mkdir(`${tmpdir}`)
   })
   afterEach(async () => {
@@ -56,8 +53,7 @@ describe('yaml.enrich', async () => {
             slug: ['article'],
           },
         ])
-      )
-  )
+      ))
 
   it('lang in file', async () =>
     Promise.resolve()
@@ -84,5 +80,4 @@ describe('yaml.enrich', async () => {
           },
         ])
       ))
-  
 })

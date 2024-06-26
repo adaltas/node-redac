@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises'
-import path from 'path'
+import path from 'node:path'
 
 export default async function pluginYamlNormalize(plugin) {
   let { config } = plugin

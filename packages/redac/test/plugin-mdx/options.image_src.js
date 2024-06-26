@@ -10,9 +10,7 @@ describe('mdx.options.image_src', async () => {
   let count = 0
   beforeEach(async () => {
     tmpdir = `${os.tmpdir()}/redac-test-mdx-options-image_src-${count++}`
-    try {
-      await fs.rm(tmpdir, { recursive: true })
-    } catch {}
+    await fs.rm(tmpdir, { recursive: true }).catch(() => {})
     await fs.mkdir(`${tmpdir}`)
   })
   afterEach(async () => {

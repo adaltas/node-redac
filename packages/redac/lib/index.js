@@ -9,6 +9,9 @@ export default function engine(plugins = []) {
     if (typeof plugin === 'function') {
       return plugin()
     } else if (plugin !== null && typeof plugin === 'object') {
+      // if (typeof plugin.plugin === 'string') {
+      //   plugin.plugin = await import(path.resolve(process.cwd, )
+      // }
       if (typeof plugin.plugin === 'function') {
         return plugin.plugin.call(null, plugin.config)
       } else if (plugin.plugin !== null && typeof plugin.plugin === 'object') {

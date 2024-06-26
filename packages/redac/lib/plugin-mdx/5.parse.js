@@ -45,6 +45,9 @@ const imageSrc = ({ document, config }) => {
 export default async function pluginMdxParse(plugin) {
   const { documents, config } = plugin
   plugin.documents = await each(documents, async (document) => {
+    if (document.cache) {
+      return document
+    }
     const { value, data, toc } = await remark()
       .use(mdx)
       .use(frontmatter)

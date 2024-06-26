@@ -8,9 +8,7 @@ describe('mdx.load', async () => {
   let count = 0
   beforeEach(async () => {
     tmpdir = `${os.tmpdir()}/redac-test-mdx-load-${count++}`
-    try {
-      await fs.rm(tmpdir, { recursive: true })
-    } catch {}
+    await fs.rm(tmpdir, { recursive: true }).catch(() => {})
     await fs.mkdir(`${tmpdir}`)
   })
   afterEach(async () => {

@@ -1,8 +1,11 @@
-import path from 'path'
+import path from 'node:path'
 
 export default function pluginMdxEnrich(plugin) {
   const { config, documents } = plugin
   plugin.documents = documents.map((document) => {
+    if (document.cache) {
+      return document
+    }
     // Convert string path to slug elements
     if (config.uber) {
       const [collection, ...slug] = document.path_relative.split(path.sep)

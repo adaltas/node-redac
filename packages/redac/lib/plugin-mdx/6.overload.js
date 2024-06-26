@@ -1,3 +1,5 @@
+
+// Reconstruct the slug if found in metadata
 export default function pluginMdxOverload(plugin) {
   const { documents } = plugin
   // Index absolute slug found in filenames with metadata slug
@@ -8,6 +10,9 @@ export default function pluginMdxOverload(plugin) {
   })
   // Reconstruct the slug with metadata slug if present
   plugin.documents = documents.map((document) => {
+    if (document.cache) {
+      return document
+    }
     const newSlug = []
     for (let i = 0; i < document.slug.length; i++) {
       const overloadedSlug =

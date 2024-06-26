@@ -1,9 +1,11 @@
 import each from 'each'
 import step_1_normalize from './1.normalize.js'
-import step_2_load from './2.load.js'
-import step_3_enrich from './3.enrich.js'
-import step_4_parse from './4.parse.js'
-import step_5_overload from './5.overload.js'
+import step_2_cache_read from './2.cache_read.js'
+import step_3_load from './3.load.js'
+import step_4_enrich from './4.enrich.js'
+import step_5_parse from './5.parse.js'
+import step_6_overload from './6.overload.js'
+import step_7_cache_write from './7.cache_write.js'
 
 const getConfigs = (config) => {
   if (config == null) return []
@@ -41,10 +43,12 @@ export default (config) => {
         each(configs, true, async (config) => {
           const docs = await Promise.resolve({ config })
             .then(step_1_normalize)
-            .then(step_2_load)
-            .then(step_3_enrich)
-            .then(step_4_parse)
-            .then(step_5_overload)
+            .then(step_2_cache_read)
+            .then(step_3_load)
+            .then(step_4_enrich)
+            .then(step_5_parse)
+            .then(step_6_overload)
+            .then(step_7_cache_write)
             .then(({ documents }) => documents)
           documents.push(...docs)
         }),
@@ -54,8 +58,10 @@ export default (config) => {
 
 export {
   step_1_normalize as normalize,
-  step_2_load as load,
-  step_3_enrich as enrich,
-  step_4_parse as parse,
-  step_5_overload as overload,
+  step_2_cache_read as cache_read,
+  step_3_load as load,
+  step_4_enrich as enrich,
+  step_5_parse as parse,
+  step_6_overload as overload,
+  step_7_cache_write as cache_write,
 }
