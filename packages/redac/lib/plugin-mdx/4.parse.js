@@ -56,7 +56,6 @@ export default async function pluginMdxParse(plugin) {
       .use(imageSrc, { document: document, config })
       .process(document.content_raw)
     return merge(document, {
-      content_md: value,
       data: data,
       toc: toc,
     })
