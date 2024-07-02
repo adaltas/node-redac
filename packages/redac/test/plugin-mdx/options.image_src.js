@@ -38,7 +38,7 @@ describe('mdx.options.image_src', async () => {
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))
       .then(({ documents }) =>
-        documents[0].content_md.trim().should.eql(dedent`
+        documents[0].content_raw.trim().should.eql(dedent`
           ![Alt text](./relative/path/image.png)
           ![Alt text](/absolute/path/image.png)
           ![Alt text](https://domain.com/path/image.png)
@@ -66,7 +66,7 @@ describe('mdx.options.image_src', async () => {
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))
       .then(({ documents }) =>
-        documents[0].content_md.trim().should.eql(dedent`
+        documents[0].content_raw.trim().should.eql(dedent`
           ![Alt text](/redac-test-mdx-options-image_src-1/parent/child/relative/path/image.png)
           ![Alt text](/redac-test-mdx-options-image_src-1/absolute/path/image.png)
           ![Alt text](https://domain.com/path/image.png)
@@ -114,7 +114,7 @@ describe('mdx.options.image_src', async () => {
       .then((plugin) => enrich(plugin))
       .then((plugin) => parse(plugin))
       .then(({ documents }) =>
-        documents[0].content_md.trim().should.eql(dedent`
+        documents[0].content_raw.trim().should.eql(dedent`
           ![Alt text](https://public.local/parent/child/relative/path/image.png)
           ![Alt text](https://public.local/absolute/path/image.png)
           ![Alt text](https://domain.com/path/image.png)

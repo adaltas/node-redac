@@ -1,11 +1,10 @@
 import each from 'each'
 import { merge } from 'mixme'
-import { unified } from 'unified'
-import parse from 'remark-parse'
+import { remark } from 'remark'
+import mdx from 'remark-mdx'
 import frontmatter from 'remark-frontmatter'
 import extractFrontmatter from 'remark-extract-frontmatter'
 import yaml from 'yaml'
-import stringify from 'remark-stringify'
 import tableOfContent from 'remark-table-of-content'
 import titleToFrontmatter from 'remark-title-to-frontmatter'
 import { visit } from 'unist-util-visit'
@@ -46,16 +45,17 @@ const imageSrc = ({ document, config }) => {
 export default async function pluginMdxParse(plugin) {
   const { documents, config } = plugin
   plugin.documents = await each(documents, async (document) => {
-    const { value, data, toc } = await unified()
-      .use(parse)
-      .use(stringify)
+    const res = await remark()
+      .use(mdx)
       .use(frontmatter)
       .use(extractFrontmatter, { yaml: yaml.parse, throws: true }) // Create file.data property
       .use(titleToFrontmatter)
       .use(tableOfContent, { depth_min: 2, depth_max: 3 })
       .use(imageSrc, { document: document, config })
       .process(document.content_raw)
+    const { value, data, toc } = res
     return merge(document, {
+      content_raw: value,
       data: data,
       toc: toc,
     })
