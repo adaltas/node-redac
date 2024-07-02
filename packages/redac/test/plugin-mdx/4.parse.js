@@ -40,7 +40,7 @@ describe('mdx.parse', async () => {
       .then(({ documents }) =>
         documents.should.match([
           {
-            content_raw: 'Some content\n\n## Heading 2\n',
+            value: 'Some content\n\n## Heading 2\n',
             data: {
               title: 'Heading 1',
             },

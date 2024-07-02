@@ -9,7 +9,7 @@ export default async function pluginMdxLoad(plugin) {
   } = plugin
   let documents = await glob(pattern, { cwd: target })
   documents = await each(documents, async (file) => ({
-    content_raw: await fs.readFile(path.resolve(target, file)),
+    value: await fs.readFile(path.resolve(target, file)),
     path_absolute: path.resolve(target, file),
     path_relative: file,
   }))

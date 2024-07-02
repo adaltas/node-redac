@@ -45,17 +45,16 @@ const imageSrc = ({ document, config }) => {
 export default async function pluginMdxParse(plugin) {
   const { documents, config } = plugin
   plugin.documents = await each(documents, async (document) => {
-    const res = await remark()
+    const { value, data, toc } = await remark()
       .use(mdx)
       .use(frontmatter)
       .use(extractFrontmatter, { yaml: yaml.parse, throws: true }) // Create file.data property
       .use(titleToFrontmatter)
       .use(tableOfContent, { depth_min: 2, depth_max: 3 })
       .use(imageSrc, { document: document, config })
-      .process(document.content_raw)
-    const { value, data, toc } = res
+      .process(document.value)
     return merge(document, {
-      content_raw: value,
+      value: value,
       data: data,
       toc: toc,
     })
